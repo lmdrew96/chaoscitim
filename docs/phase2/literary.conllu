@@ -1,0 +1,54 @@
+# generator = UDPipe 2, https://lindat.mff.cuni.cz/services/udpipe
+# udpipe_model = romanian-rrt-ud-2.17-251125
+# udpipe_model_licence = CC BY-NC-SA
+# newdoc
+# newpar
+# sent_id = 1
+# text = În vremea veche, pe când oamenii, cum sunt ei astăzi, nu erau decât în germenii viitorului, pe când Dumnezeu călca încă cu picioarele sale sfinte pietroasele pustii ale pământului, trăia un împărat întunecat și gânditor ca miazănoaptea cea senină.
+1	În	în	ADP	Spsa	AdpType=Prep|Case=Acc	2	case	_	_
+2	vremea	vreme	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	35	obl	_	_
+3	veche	vechi	ADJ	Afpfsrn	Case=Acc,Nom|Definite=Ind|Degree=Pos|Gender=Fem|Number=Sing	2	amod	_	SpaceAfter=No
+4	,	,	PUNCT	COMMA	_	2	punct	_	_
+5	pe	pe	ADP	Spsa	AdpType=Prep|Case=Acc	6	case	_	_
+6	când	când	ADV	Rw	PronType=Int,Rel	15	advmod	_	_
+7	oamenii	om	NOUN	Ncmpry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Plur	15	nsubj	_	SpaceAfter=No
+8	,	,	PUNCT	COMMA	_	10	punct	_	_
+9	cum	cum	ADV	Rw	PronType=Int,Rel	10	advmod	_	_
+10	sunt	fi	VERB	Vmip3p	Mood=Ind|Number=Plur|Person=3|Tense=Pres|VerbForm=Fin	15	advcl	_	_
+11	ei	el	PRON	Pp3mpr--------s	Case=Acc,Nom|Gender=Masc|Number=Plur|Person=3|PronType=Prs|Strength=Strong	10	nsubj	_	_
+12	astăzi	astăzi	ADV	Rgp	Degree=Pos	10	advmod	_	SpaceAfter=No
+13	,	,	PUNCT	COMMA	_	10	punct	_	_
+14	nu	nu	PART	Qz	Polarity=Neg	15	advmod	_	_
+15	erau	fi	VERB	Vmii3p	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	35	advcl	_	_
+16	decât	decât	ADV	Rc	_	18	advmod	_	_
+17	în	în	ADP	Spsa	AdpType=Prep|Case=Acc	18	case	_	_
+18	germenii	germen	NOUN	Ncmpry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Plur	15	obl	_	_
+19	viitorului	viitor	NOUN	Ncmsoy	Case=Dat,Gen|Definite=Def|Gender=Masc|Number=Sing	18	nmod	_	SpaceAfter=No
+20	,	,	PUNCT	COMMA	_	24	punct	_	_
+21	pe	pe	ADP	Spsa	AdpType=Prep|Case=Acc	22	case	_	_
+22	când	când	ADV	Rw	PronType=Int,Rel	24	advmod	_	_
+23	Dumnezeu	Dumnezeu	PROPN	Np	_	24	nsubj	_	_
+24	călca	călca	VERB	Vmii3s	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	15	advcl	_	_
+25	încă	încă	ADV	Rgp	Degree=Pos	24	advmod	_	_
+26	cu	cu	ADP	Spsa	AdpType=Prep|Case=Acc	27	case	_	_
+27	picioarele	picior	NOUN	Ncfpry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Plur	24	obl	_	_
+28	sale	său	DET	Ds3fp-s	Gender=Fem|Number=Plur|Number[psor]=Sing|Person=3|Poss=Yes|PronType=Prs	27	det	_	_
+29	sfinte	sfânt	ADJ	Afpfp-n	Definite=Ind|Degree=Pos|Gender=Fem|Number=Plur	27	amod	_	_
+30	pietroasele	pietros	ADJ	Afpfpry	Case=Acc,Nom|Definite=Def|Degree=Pos|Gender=Fem|Number=Plur	31	amod	_	_
+31	pustii	pustiu	NOUN	Ncfp-n	Definite=Ind|Gender=Fem|Number=Plur	24	obj	_	_
+32	ale	al	DET	Tsfp	Gender=Fem|Number=Plur|Poss=Yes|PronType=Prs	33	det	_	_
+33	pământului	pământ	NOUN	Ncmsoy	Case=Dat,Gen|Definite=Def|Gender=Masc|Number=Sing	31	nmod	_	SpaceAfter=No
+34	,	,	PUNCT	COMMA	_	24	punct	_	_
+35	trăia	trăi	VERB	Vmii3s	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	0	root	_	_
+36	un	un	DET	Timsr	Case=Acc,Nom|Gender=Masc|Number=Sing|PronType=Ind	37	det	_	_
+37	împărat	împărat	NOUN	Ncms-n	Definite=Ind|Gender=Masc|Number=Sing	35	nsubj	_	_
+38	întunecat	întunecat	ADJ	Afpms-n	Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing	37	amod	_	_
+39	și	și	CCONJ	Crssp	Polarity=Pos	40	cc	_	_
+40	gânditor	gânditor	ADJ	Afpms-n	Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing	38	conj	_	_
+41	ca	ca	ADP	Spsa	AdpType=Prep|Case=Acc	42	case	_	_
+42	miazănoaptea	miazănoaptea	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	40	obl	_	_
+43	cea	acela	PRON	Pd3fsr	Case=Acc,Nom|Gender=Fem|Number=Sing|Person=3|PronType=Dem	44	det	_	_
+44	senină	senin	ADJ	Afpfsrn	Case=Acc,Nom|Definite=Ind|Degree=Pos|Gender=Fem|Number=Sing	42	amod	_	SpaceAfter=No
+45	.	.	PUNCT	PERIOD	_	35	punct	_	SpaceAfter=No
+
+

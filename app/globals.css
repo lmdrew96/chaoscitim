@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+ * Theme — ADHDesigns palette, ChaosCitim slice
+ *
+ * Olive       #849440  →  used for success / tier-0 affordances
+ * Deep Teal   #244952  →  primary surface accent
+ * Amber       #DFA649  →  tier-1 morphology highlight
+ * Mauve       #88739E  →  tier-2 role highlight
+ * Sage Teal   #8CBDB9  →  tier-3 gloss highlight
+ * Off White   #F7F5FA  →  reading surface
+ * Deep Dark   #1E1830  →  ink
+ * ───────────────────────────────────────────────────────────── */
+:root {
+  --background: #F7F5FA;
+  --foreground: #1E1830;
+  --tier-1: #DFA649;
+  --tier-2: #88739E;
+  --tier-3: #8CBDB9;
+  --accent: #244952;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-tier-1: var(--tier-1);
+  --color-tier-2: var(--tier-2);
+  --color-tier-3: var(--tier-3);
+  --color-accent: var(--accent);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Georgia",
+    "Times New Roman", serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1E1830;
+    --foreground: #F7F5FA;
+  }
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  /* Generous line-height: ND-spec calls for 1.5+ for body, 1.7+ for reading. */
+  line-height: 1.6;
+}
+
+/* Reading surface: serif, slightly larger, looser leading. */
+.reading-prose {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.85;
+}
+
+/* Respect reduced-motion. Per nd-design spec. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

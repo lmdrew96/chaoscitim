@@ -1,0 +1,46 @@
+# generator = UDPipe 2, https://lindat.mff.cuni.cz/services/udpipe
+# udpipe_model = romanian-rrt-ud-2.17-251125
+# udpipe_model_licence = CC BY-NC-SA
+# newdoc
+# newpar
+# sent_id = 1
+# text = Se vinde casa lui Ion la un preț bun.
+1	Se	sine	PRON	Px3--a--------w	Case=Acc|Person=3|PronType=Prs|Reflex=Yes|Strength=Weak	2	expl:pass	_	_
+2	vinde	vinde	VERB	Vmip3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	casa	casă	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	2	nsubj:pass	_	_
+4	lui	lui	DET	Tf-so	Case=Dat,Gen|Definite=Def|Number=Sing|PronType=Art	5	det	_	_
+5	Ion	Ion	PROPN	Np	_	3	nmod	_	_
+6	la	la	ADP	Spsa	AdpType=Prep|Case=Acc	8	case	_	_
+7	un	un	DET	Timsr	Case=Acc,Nom|Gender=Masc|Number=Sing|PronType=Ind	8	det	_	_
+8	preț	preț	NOUN	Ncms-n	Definite=Ind|Gender=Masc|Number=Sing	2	obl	_	_
+9	bun	bun	ADJ	Afpms-n	Definite=Ind|Degree=Pos|Gender=Masc|Number=Sing	8	amod	_	SpaceAfter=No
+10	.	.	PUNCT	PERIOD	_	2	punct	_	_
+
+# sent_id = 2
+# text = Se merge la teatru duminica seara cu prietenii.
+1	Se	sine	PRON	Px3--a--------w	Case=Acc|Person=3|PronType=Prs|Reflex=Yes|Strength=Weak	2	expl:pv	_	_
+2	merge	merge	VERB	Vmip3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+3	la	la	ADP	Spsa	AdpType=Prep|Case=Acc	4	case	_	_
+4	teatru	teatru	NOUN	Ncms-n	Definite=Ind|Gender=Masc|Number=Sing	2	obl	_	_
+5	duminica	duminica	ADV	Rgp	Degree=Pos	2	advmod	_	_
+6	seara	seara	ADV	Rgp	Degree=Pos	2	advmod	_	_
+7	cu	cu	ADP	Spsa	AdpType=Prep|Case=Acc	8	case	_	_
+8	prietenii	prieten	NOUN	Ncmpry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Plur	2	obl	_	SpaceAfter=No
+9	.	.	PUNCT	PERIOD	_	2	punct	_	_
+
+# sent_id = 3
+# text = Maria se spală pe față cu apă rece în fiecare dimineață.
+1	Maria	Maria	PROPN	Np	_	3	nsubj	_	_
+2	se	sine	PRON	Px3--a--------w	Case=Acc|Person=3|PronType=Prs|Reflex=Yes|Strength=Weak	3	expl:pv	_	_
+3	spală	spăla	VERB	Vmip3	Mood=Ind|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	pe	pe	ADP	Spsa	AdpType=Prep|Case=Acc	5	case	_	_
+5	față	față	NOUN	Ncfsrn	Case=Acc,Nom|Definite=Ind|Gender=Fem|Number=Sing	3	obl	_	_
+6	cu	cu	ADP	Spsa	AdpType=Prep|Case=Acc	7	case	_	_
+7	apă	apă	NOUN	Ncfsrn	Case=Acc,Nom|Definite=Ind|Gender=Fem|Number=Sing	3	obl	_	_
+8	rece	rece	ADJ	Afpfsrn	Case=Acc,Nom|Definite=Ind|Degree=Pos|Gender=Fem|Number=Sing	7	amod	_	_
+9	în	în	ADP	Spsa	AdpType=Prep|Case=Acc	11	case	_	_
+10	fiecare	fiecare	DET	Di3-sr---e	Case=Acc,Nom|Number=Sing|Person=3|Position=Prenom|PronType=Ind	11	det	_	_
+11	dimineață	dimineață	NOUN	Ncfsrn	Case=Acc,Nom|Definite=Ind|Gender=Fem|Number=Sing	3	obl	_	SpaceAfter=No
+12	.	.	PUNCT	PERIOD	_	3	punct	_	SpaceAfter=No
+
+

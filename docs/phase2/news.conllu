@@ -1,0 +1,62 @@
+# generator = UDPipe 2, https://lindat.mff.cuni.cz/services/udpipe
+# udpipe_model = romanian-rrt-ud-2.17-251125
+# udpipe_model_licence = CC BY-NC-SA
+# newdoc
+# newpar
+# sent_id = 1
+# text = Președintele a primit luni o delegație a guvernului.
+1	Președintele	președinte	NOUN	Ncmsry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Sing	3	nsubj	_	_
+2	a	avea	AUX	Va--3s	Number=Sing|Person=3	3	aux	_	_
+3	primit	primi	VERB	Vmp--sm	Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	_
+4	luni	lună	NOUN	Ncfp-n	Definite=Ind|Gender=Fem|Number=Plur	3	obj	_	_
+5	o	un	DET	Tifsr	Case=Acc,Nom|Gender=Fem|Number=Sing|PronType=Ind	6	det	_	_
+6	delegație	delegație	NOUN	Ncfsrn	Case=Acc,Nom|Definite=Ind|Gender=Fem|Number=Sing	3	obj	_	_
+7	a	al	DET	Tsfs	Gender=Fem|Number=Sing|Poss=Yes|PronType=Prs	8	det	_	_
+8	guvernului	guvern	NOUN	Ncmsoy	Case=Dat,Gen|Definite=Def|Gender=Masc|Number=Sing	6	nmod	_	SpaceAfter=No
+9	.	.	PUNCT	PERIOD	_	3	punct	_	_
+
+# sent_id = 2
+# text = La întâlnire, ministrul i-a prezentat planul de reforme și i-a cerut sprijinul în Parlament.
+1	La	la	ADP	Spsa	AdpType=Prep|Case=Acc	2	case	_	_
+2	întâlnire	întâlnire	NOUN	Ncfsrn	Case=Acc,Nom|Definite=Ind|Gender=Fem|Number=Sing	7	obl	_	SpaceAfter=No
+3	,	,	PUNCT	COMMA	_	2	punct	_	_
+4	ministrul	ministru	NOUN	Ncmsry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Sing	7	nsubj	_	_
+5	i-	el	PRON	Pp3-sd--y-----w	Case=Dat|Number=Sing|Person=3|PronType=Prs|Strength=Weak|Variant=Short	7	expl:poss	_	SpaceAfter=No
+6	a	avea	AUX	Va--3s	Number=Sing|Person=3	7	aux	_	_
+7	prezentat	prezenta	VERB	Vmp--sm	Gender=Masc|Number=Sing|VerbForm=Part	0	root	_	_
+8	planul	plan	NOUN	Ncmsry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Sing	7	obj	_	_
+9	de	de	ADP	Spsa	AdpType=Prep|Case=Acc	10	case	_	_
+10	reforme	reformă	NOUN	Ncfp-n	Definite=Ind|Gender=Fem|Number=Plur	8	nmod	_	_
+11	și	și	CCONJ	Crssp	Polarity=Pos	14	cc	_	_
+12	i-	el	PRON	Pp3-sd--y-----w	Case=Dat|Number=Sing|Person=3|PronType=Prs|Strength=Weak|Variant=Short	14	iobj	_	SpaceAfter=No
+13	a	avea	AUX	Va--3s	Number=Sing|Person=3	14	aux	_	_
+14	cerut	cere	VERB	Vmp--sm	Gender=Masc|Number=Sing|VerbForm=Part	7	conj	_	_
+15	sprijinul	sprijin	NOUN	Ncmsry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Sing	14	obj	_	_
+16	în	în	ADP	Spsa	AdpType=Prep|Case=Acc	17	case	_	_
+17	Parlament	parlament	NOUN	Ncms-n	Definite=Ind|Gender=Masc|Number=Sing	14	obl	_	SpaceAfter=No
+18	.	.	PUNCT	PERIOD	_	7	punct	_	_
+
+# sent_id = 3
+# text = Datele oficiale arată că procesul va fi finalizat până în vara acestui an, dacă majoritatea își menține poziția.
+1	Datele	dată	NOUN	Ncfpry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Plur	3	nsubj	_	_
+2	oficiale	oficial	ADJ	Afpfp-n	Definite=Ind|Degree=Pos|Gender=Fem|Number=Plur	1	amod	_	_
+3	arată	arăta	VERB	Vmip3	Mood=Ind|Person=3|Tense=Pres|VerbForm=Fin	0	root	_	_
+4	că	că	SCONJ	Csssp	Polarity=Pos	8	mark	_	_
+5	procesul	proces	NOUN	Ncmsry	Case=Acc,Nom|Definite=Def|Gender=Masc|Number=Sing	8	nsubj:pass	_	_
+6	va	vrea	AUX	Va--3s	Number=Sing|Person=3	8	aux	_	_
+7	fi	fi	AUX	Vanp	Tense=Pres|VerbForm=Inf	8	aux:pass	_	_
+8	finalizat	finaliza	VERB	Vmp--sm	Gender=Masc|Number=Sing|VerbForm=Part	3	ccomp	_	_
+9	până	până	SCONJ	Csssp	ExtPos=ADP|Polarity=Pos	11	case	_	_
+10	în	în	ADP	Spsa	AdpType=Prep|Case=Acc	9	fixed	_	_
+11	vara	vară	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	8	obl:tmod	_	_
+12	acestui	acest	DET	Dd3mso---e	Case=Dat,Gen|Gender=Masc|Number=Sing|Person=3|Position=Prenom|PronType=Dem	13	det	_	_
+13	an	an	NOUN	Ncms-n	Definite=Ind|Gender=Masc|Number=Sing	11	nmod	_	SpaceAfter=No
+14	,	,	PUNCT	COMMA	_	18	punct	_	_
+15	dacă	dacă	SCONJ	Csssp	Polarity=Pos	18	mark	_	_
+16	majoritatea	majoritate	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	18	nsubj	_	_
+17	își	sine	PRON	Px3--d--------w	Case=Dat|Person=3|PronType=Prs|Reflex=Yes|Strength=Weak	18	expl:poss	_	_
+18	menține	menține	VERB	Vmip3s	Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin	8	advcl	_	_
+19	poziția	poziție	NOUN	Ncfsry	Case=Acc,Nom|Definite=Def|Gender=Fem|Number=Sing	18	obj	_	SpaceAfter=No
+20	.	.	PUNCT	PERIOD	_	3	punct	_	SpaceAfter=No
+
+
