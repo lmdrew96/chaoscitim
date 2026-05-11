@@ -1,0 +1,244 @@
+{{also|mérge}}
+==English==
+{{wp}}
+
+===Etymology===
+Borrowed from {{bor|en|la|mergō|t=to dip; dip in; plunge; sink down into; immerse; overwhelm}}.
+
+===Pronunciation===
+* {{IPA|en|/mɜːd͡ʒ/|a=UK}}
+* {{IPA|en|/mɝd͡ʒ/|a=US}}
+** {{audio|en|en-us-merge.ogg|a=US}}
+* {{rhymes|en|ɜː(ɹ)dʒ|s=1}}
+
+===Verb===
+{{en-verb}}
+
+# {{lb|en|transitive|intransitive}} To [[combine]] into a [[whole]].
+#: {{syn|en|Thesaurus:coalesce}}
+#: {{ant|en|divide|split}}
+#: {{ux|en|Headquarters '''merged''' the operations of the three divisions.}}
+#: {{ux|en|The two companies '''merged'''.}}
+#* {{RQ:Burke National Assembly|passage=to '''merge''' all natural and all social sentiment in inordinate vanity}}
+#* {{quote-journal|en|author=[[w:Thomas De Quincey|[Thomas De Quincey]]]|title={{w|Samuel Taylor Coleridge}}. By the English Opium-eater.{{nb...|Continued from Our October Number.}}|editor=[[w:William Tait (publisher)|William Tait]]|work=[[w:Tait's Edinburgh Magazine|Tait’s Edinburgh Magazine]]|location=Edinburgh|publisher=William Tait{{nb...|Simpkin, Marshall, & Co., London; and John Cumming, Dublin.}}|month=January|year=1835|volume=II|issue=XIII|page=8|pageurl=https://books.google.com/books?id=198RAAAAYAAJ&pg=PA8|column=1|oclc=7202007|passage=Whig and Tory were '''merged''' and swallowed up in the transcendent duties of patriots—Englishmen—lovers of liberty.}}
+# To [[blend]] [[gradual]]ly into something else.
+#: {{ux|en|The lanes of traffic '''merged'''.}}
+#: {{ux|en|The sky and sea seem to '''merge''' at the horizon.}} 
+
+====Derived terms====
+{{col|en|commerge|demerge|merge sort|mergeburst|mergee|mergism|mergist|mismerge|remerge|unmerge|merger|mergeable|mergeability|mail merge|match-merge|merge-purge|urge to merge}}
+
+====Translations====
+{{trans-top-see|(transitive) to combine into a whole|fuse|coalesce|combine}}
+* Azerbaijani: {{t+|az|birləşdirmək}}
+* Bulgarian: {{t+|bg|обединявам}}
+* Catalan: {{t+|ca|fusionar}}
+* Czech: {{t|cs|sloučit}}
+* Danish: {{t|da|[[forene]], [[fusionere]]}}
+* Dutch: {{t+|nl|samenvoegen}}, {{t+|nl|fuseren}}, {{t+|nl|fusioneren}} {{qualifier|Belgium}}
+* Finnish: {{t+|fi|yhdistää}}, {{t+|fi|fuusioida}}, {{t|fi|sulauttaa}}, {{t|fi|[[liittää]] [[yhteen]]}}
+* French: {{t+|fr|fusionner}}
+* German: {{t+|de|zusammenlegen}}, {{t+|de|zusammenfügen}}, {{t+|de|zusammenführen}}, {{t+|de|vereinen}}, {{t+|de|fusionieren}} {{gloss|companies, departments}}
+* Greek: {{t+|el|συγχωνεύω}}
+* Hungarian: {{t+|hu|egyesít}}, {{t+|hu|egybeolvaszt}}, {{t+|hu|összefűz}}, {{t+|hu|vegyít}}
+* Italian: {{t|it|fondersi}}
+* Japanese: {{t+|ja|合わせる|tr=awaseru}}, {{t+|ja|合併|alt=合併する|tr=gappei suru}}
+* Manchu: {{t|mnc|ᡴᠠᠮᠴᡳᠮᠪᡳ|tr=kamcimbi}}
+* Māori: {{t|mi|whakahanumi}}
+* Polish: [[łączyć]] / [[połączyć]]
+* Portuguese: {{t+|pt|unir}}
+* Romanian: {{t+|ro|combina}}
+* Russian: {{t+|ru|объедини́ть}}, {{t+|ru|слить}}
+* Spanish: {{t|es|merger}}
+* Swedish: {{t+|sv|slå ihop}}, {{t|sv|fusionera}}, {{t+|sv|förena}}
+* Tamil: {{t+|ta|இணை}}, {{t+|ta|சேர்}}
+* Turkish: {{t+|tr|birleştirmek}}
+{{trans-bottom}}
+
+{{trans-top-see|(intransitive) to combine into a whole|fuse}}
+* Arabic: {{t|ar|دَمَجَ}}
+* Azerbaijani: {{t+|az|birləşdirmək}}
+* Bulgarian: {{t|bg|сливам се}}, {{t|bg|съединявам се}}, {{t|bg|обединявам се}}
+* Catalan: {{t+|ca|fusionar}}
+* Chinese: {{t+|zh|合并}} (hébìng)
+* Danish: {{t|da|forene, fusionere}}
+* Dutch: {{t+|nl|samenkomen}}, {{t+|nl|samenvloeien}} {{qualifier|liquids}}, {{t+|nl|fusioneren}}, {{t+|nl|samengaan}}, {{t|nl|samengroeien}}
+* Esperanto: {{t|eo|kunfandiĝi}}
+* Finnish: {{t|fi|[[liittyä]] [[yhteen]]}}, {{t+|fi|yhdistyä}}, {{t+|fi|sulautua}}, {{t+|fi|fuusioitua}}
+* French: {{t+|fr|amalgamer}}, {{t+|fr|fusionner}}
+* German: {{t+|de|verschmelzen}}, {{t+|de|zusammenkommen}}, {{t|de|sich vereinen}}, {{t|de|sich zusammenschließen}}
+* Greek: {{t+|el|συγχωνεύομαι}}
+* Hungarian: {{t+|hu|egyesül}}, {{t+|hu|egybeolvad}}, {{t+|hu|összeolvad}}, {{t+|hu|fuzionál}}
+* Italian: {{t+|it|unirsi}}
+* Korean: {{t+|ko|합하다}}
+* Manchu: {{t|mnc|ᡴᠠᠮᠴᡳᠪᡠᠮᠪᡳ|tr=kamcibumbi}}
+* Māori: {{t|mi|hanumi}}
+* Polish: [[łączyć się]] / [[połączyć się]]
+* Portuguese: {{t+|pt|convergir}}, {{t|pt|[[unir]]-[[se]]}}, {{t|pt|[[juntar]]-[[se]]}}
+* Romanian: {{t|ro|se [[combina]]}}
+* Russian: {{t+|ru|объединя́ться}}, {{t+|ru|слива́ться}}
+* Swedish: {{t|sv|sammansmälta}}, {{t+|sv|gå ihop}}, {{t|sv|fusionera}}
+* Tamil: {{t+|ta|இணை}}, {{t+|ta|சேர்}}
+* Turkish: {{t+|tr|birleşmek}}
+{{trans-bottom}}
+
+{{trans-top|to blend gradually into something else}}
+* Catalan: {{t+|ca|transformar}}
+* Dutch: {{t+|nl|samenvloeien}} {{qualifier|liquids}}, {{t+|nl|overgaan}} {{t+|nl|in}}
+* Finnish: {{t+|fi|sekoittua}}, {{t+|fi|sulautua}}, {{t+|fi|yhtyä}}
+* German: {{t+|de|zusammenkommen}}
+* Hungarian: {{t+|hu|beleolvad}}
+* Māori: {{t|mi|whakahanumi}}
+* Romanian: {{t|ro|se [[îmbina]]}}
+* Tamil: {{t+|ta|கல}}
+* Turkish: {{t+|tr|karışmak}}
+{{trans-bottom}}
+
+{{checktrans-top}}
+* Dutch: {{t+check|nl|fuseren}}
+* German: {{t+check|de|zusammenkommen}}, {{t-check|de|(sich) [[zusammenschließen]]}}, {{t+check|de|fusionieren}}
+{{trans-bottom}}
+
+===Noun===
+{{en-noun}}
+
+# The [[join]]ing together of multiple [[source]]s.
+#: {{ux|en|There are often accidents at that traffic '''merge'''.}}
+#: {{ux|en|The '''merge''' of the two documents failed.}}
+# {{lb|en|syntax}} Within the Minimalist Program, a fundamental operation of syntactic construction
+
+====Synonyms====
+* {{l|en|merger}}
+* {{l|en|merging}}
+
+====Derived terms====
+{{col|en|mail merge|match-merge|mergesort|zipper merge|merge lane|merge request}}
+
+====Translations====
+{{trans-top-see|joining of multiple sources|convergence|confluence}}
+* Bulgarian: {{t|bg|обединяване|n}}
+* Catalan: {{t+|ca|combinació|f}}
+* Czech: {{t|cs|sloučit|pf}}, {{t|cs|slučovat|impf}}
+* Danish: {{t|da|sammenfletning|c}}
+* Dutch: {{t+|nl|samenvloeiing|f}}, {{t+|nl|kruising|f}}
+* Romanian: {{t+|ro|combinare|f}}
+* Russian: {{t+|ru|слия́ние|n}}
+* Slovak: {{t|sk|zlúčiť|pf}}, {{t|sk|zlučovať|impf}}
+* Spanish: {{t|es|horcajo|m}}, {{t+|es|confluencia|f}}
+* Tamil: {{t+|ta|சேர்ப்பு}}, {{t+|ta|கலப்பு}}
+{{trans-bottom}}
+
+{{trans-top|linguistics: syntactic operation}}
+* French: {{t+|fr|fusionner}}, {{t+|fr|combiner}}
+* Portuguese: {{t+|pt|conectar}}
+* Spanish: {{t+|es|ensamble|m}}, {{t+|es|fusión|f}}
+{{trans-bottom}}
+
+===Anagrams===
+* {{anagrams|en|a=eegmr|emerg}}
+
+{{cln|en|ergative verbs}}
+
+==Italian==
+
+===Pronunciation===
+{{it-pr|mèrge}}
+
+===Verb===
+{{head|it|verb form}}
+
+# {{inflection of|it|mergere||3|s|pres|indc}}
+
+===Anagrams===
+* {{anagrams|it|a=eegmr|germe}}
+
+==Latin==
+
+===Verb===
+{{head|la|verb form}}
+
+# {{inflection of|la|mergō||2|s|pres|actv|impr}}
+
+==Old English==
+
+===Pronunciation===
+* {{ang-IPA|merġe}}
+
+===Adjective===
+{{ang-adj|merġe}}
+
+# {{alternative form of|ang|myrġe}}
+
+====Declension====
+{{ang-adecl|merġe}}
+
+==Romanian==
+
+===Alternative forms===
+* {{alt|ro|mere||Transylvania|Banat}}
+* {{alt|ro|me||Maramureș|North|_|Transylvania}}
+* {{alt|ro|мерӂе||new cyrl}}
+
+===Etymology===
+{{inh+|ro|la|mergo|mergere}}, itself ultimately from {{der|ro|ine-pro|*mesg-||to plunge, dip}}, with a unique sense developing in Balkanic or Eastern Romance. Compare {{cog|rup|njergu}}; cf. also {{cog|sq|mërgoj||to move away}} and {{cog|sc|imbergere||to push}}. The semantic shift could be owed to confusion with {{m|la|pergō|pergere}} or {{m|la|meō|meāre}}.
+
+===Pronunciation===
+* {{IPA|ro|/ˈmer.d͡ʒe/}}
+* {{audio|ro|LL-Q7913 (ron)-Filosoful-merge.wav}}
+* {{audio|ro|LL-Q7913 (ron)-Andreea Teodoraa-merge.wav}}
+* {{rhyme|ro|erd͡ʒe|s=2}}
+* {{hyph|ro|mer|ge}}
+
+===Verb===
+{{ro-verb|merge|mers|meargă}} {{tlb|ro|intransitive}}
+
+# to [[walk]]
+#: {{syn|ro|umbla}}
+# {{lb|ro|informal|by extension|of|inanimate subjects}} to [[move]]
+#: {{ux|ro|În punctul mort, o mașină '''merge''' numai din inerție.|When in neutral, a car only '''moves''' through inertia.}}
+#: {{ux|ro|Planetele '''merg''' pe cer cu viteze diferite de a stelelor.|Planets '''move''' in the sky at speeds different from that of the stars.}}
+# {{lb|ro|by extension}} to [[go]] {{gl|take oneself to somewhere}}
+#: {{syn|ro|se [[duce]]}}
+#: {{ux|ro|'''Merg''' la București mâine.|I’m '''going''' to Bucharest tomorrow.}}
+#: {{ux|ro|'''Merg''' să mă întâlnesc cu soțul surorii mele.|I’m '''going''' to meet my sister’s husband.}}
+#: {{ux|ro|Cu ce '''mergem''', cu mașina sau cu trenul?|What are we '''going''' by, car or train?}}
+# to be [[go]]ing, [[proceed]]ing a certain way
+#: {{ux|ro|Cum '''merg''' proiectele?|How are the projects '''going'''?}}
+# {{lb|ro|impersonal|of|beings}} to be [[do]]ing a certain way {{+obj|ro|dat}}
+#: {{ux|ro|Îmi '''merge''' bine.|I’m '''doing''' fine.|lit=To me it’s '''going''' well.}}
+# {{lb|ro|informal}} to [[work]], to [[function]], to [[work out]]
+#: {{ux|ro|Calculatorul nu mai '''merge'''.|The computer doesn’t '''work''' anymore.}}
+#* {{quote-book|ro|1980|w:Marin Preda|w:Cel mai iubit dintre pământeni<t:Earth’s most beloved son>||53|{{…}}era clar, Nineta nu ezitase să curme singură o viață care „nu mai '''mergea'''“.{{pb}}Acum am o iluminare: nici a mea nu mai '''merge''', adică {{nobr|n-ar}} mai '''merge''' chiar dacă printr-un miracol ași evada și reuși să fug din țară.|{{…}}it was clear, Nineta did not hesitate to put an end by herself to a life that “wasn’t '''working''' out anymore”.{{pb}}Now I have an epiphany: mine isn’t '''working out''' anymore either, I mean, it wouldn’t ''' work out''' even if by miracle I were to escape and manage to get out of the country.|volume=1|publisher=w:Cartea Românească|location=w:Bucharest|chapter=9}}
+# {{lb|ro|informal}} to [[pair]] well {{+obj|ro|:cu<with>}}
+#* {{quote-av|ro|date=2008/3/14|title=Dan Diaconescu Direct|network=w:[[OTV (Romanian TV channel)|OTV]]|role=guest|medium=newscast|text=Unde ești tu, brânză Del,<br>Cum '''mergeai''' c-un copănel,<br>Roșii, ceapă și măsline,<br>Îmi e-așa de dor de tine.|t=Where are you, Del cheese,<br>How well you '''paired''' with a chicken thigh,<br>Tomatoes, onion and olives,<br>I miss you so much.|url=https://youtu.be/mxoqlAW8tAE}}
+# {{lb|ro|informal}} to be [[acceptable]], [[alright]]
+#* {{quote-journal|ro|1980|Marius Robescu||Teatrul<t:Theatre>||36|Bizar și comic și puțin tragic. Oricum, '''merge''', e plauzibil.|Bizarre and comical and a little tragic. Either way, '''it’s alright''', it’s plausible.|issue=12|month=December|volume_plain=year 25|url=https://www.google.ro/books/edition/Teatrul/ygkMAQAAMAAJ?&gbpv=1&bsq=%22oricum+merge%22|location=w:Bucharest}}
+# {{lb|ro|personal|or|impersonal}} to be [[going on]] {{gl|to be about to complete a time interval, usually expressed in years}} {{+obj|ro|:pe}}
+#: {{ux|ro|'''Mergeam''' pe opt ani când am început școala.|I was '''going''' on eight when I started school.}}
+#: {{ux|ro|'''Merge''' pe trei ani de când s-a închis fabrica.|It’s '''going''' on three years since the factory closed.}}
+
+====Usage notes====
+The difference between {{m|ro|umbla}} and {{m|ro||merge}} is that {{m|ro||umbla}} emphasises the act of walking itself (for its own sake or as opposed to other forms of locomotion), whereas {{m|ro||merge}} is a less marked word which additionally can simply denote the action of going somewhere, which happens to be by walking.
+
+This is not to say that {{m|ro||merge}} cannot refer to mere exercise of one’s faculty of walking; for instance, “to learn to walk” is conventionally expressed as {{m|ro||a învăța să meargă}}.
+
+====Conjugation====
+{{ro-conj-e|mer|g|3sub=meargă|2imp=mergi}}
+
+====Derived terms====
+{{col|ro
+|îi merge gura
+|îi merge la inimă
+|îi merge mintea
+|mergător
+|merge după
+|mergere
+|mers
+|mersură
+|timpul trece, leafa merge
+|treacă-meargă
+}}
+
+===Further reading===
+* {{R:DEX}}
+* {{cite-book||1965–1968||w:Dicționarul Limbii Române|https://dlr1.solirom.ro/|401–409|editors=w:Iorgu Iordan; w:Alexandru Graur; w:ro:Ion Coteanu|location=w:Bucharest|publisher=w:[[Romanian Academy|Academy of the Socialist Republic of Romania]]|volume=6}}

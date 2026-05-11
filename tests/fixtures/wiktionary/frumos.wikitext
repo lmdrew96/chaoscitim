@@ -1,0 +1,41 @@
+==Romanian==
+
+===Alternative forms===
+* {{alt|ro|фрумос||new cyrl}}
+
+===Etymology===
+{{inh+|ro|la|fōrmōsus}} (compare {{cog|it|formoso}}, {{cog|pt|formoso}}, {{cog|es|hermoso}}, {{cog|gl|fermoso}}).
+
+===Pronunciation===
+* {{IPA|ro|/fruˈmos/}}
+* {{audio|ro|LL-Q7913 (ron)-Filosoful-frumos.wav|q=male voice}}
+* {{audio|ro|LL-Q7913 (ron)-Andreea Teodoraa-frumos.wav|q=female voice}}
+* {{rhymes|ro|os|s=2}}
+* {{hyph|ro|fru|mòs}}
+
+===Adjective===
+{{ro-adj|f=frumoasă}}
+
+# [[beautiful]]
+# [[handsome]]
+#: {{syn|ro|arătos}}
+
+====Declension====
+{{ro-decl-adj|f=frumoasă}}
+
+===Adverb===
+{{ro-adv}}
+
+# [[beautifully]], [[nicely]]
+
+===Related terms===
+{{col3|ro|frumusețe
+|frumușel
+|forma
+|înfrumuseța
+|înfrumusețare
+|mușat
+}}
+
+===Further reading===
+* {{R:DEX}}

@@ -22,3 +22,7 @@ dist/
 coverage/
 next-env.d.ts
 tsconfig.tsbuildinfo
+
+# Gloss cache is regenerable from Wiktionary; do not commit.
+# Hand-curated overrides at data/seed-glosses.json ARE committed.
+data/glosses-cache.json

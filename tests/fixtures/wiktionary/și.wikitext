@@ -1,0 +1,67 @@
+{{also|Appendix:Variations of "si"}}
+==Megleno-Romanian==
+
+===Etymology===
+{{inh+|ruq|la|sīc||thus, so, like, in this way}}.
+
+===Conjunction===
+{{head|ruq|conjunction}}
+
+# [[and]]
+
+==Romanian==
+
+===Alternative forms===
+* {{alt|ro|шѝ|sc=Cyrs||old cyrl}}
+* {{alt|ro|шi|sc=Cyrl||transitional alphabet}}
+* {{alt|ro|ши|sc=Cyrl||new cyrl}}
+* {{alt|ro|șî||regional}}
+
+===Pronunciation===
+* {{IPA|ro|/ʃi/}}
+* {{rhyme|ro|i|s=1}}
+
+===Etymology 1===
+{{inh+|ro|la|sīc||thus, so, like, in this way}}. Compare {{cog|rup|shi}}, {{cog|ruq|și}}.
+Possibly related to {{cog|it|sia|pos=originally a subjunctive form of {{m|it|essere}} “to be”}} as in the construction {{m|it||sia … sia …|both … and …}}, which is equivalent to Romanian {{m|ro||și … și …}}. {{rfv-etym|ro}}
+
+====Conjunction====
+{{ro-conjunction}}
+
+# {{lb|ro|connecting words or sentences}} [[and]]
+#: {{syn|ro|iar<q:only connecting sentences>|i<q:obsolete>}}
+#: {{ux|ro|În sertar sunt hârtii '''și''' câteva pixuri '''și''' creioane.|In the drawer there are papers '''and''' a few pens '''and''' pencils.}}
+## {{ng|Connects the nonzero digit in the ones place to the rest of a number greater than 20, the way a hyphen does in English writing, or a fraction to the whole.}}
+##: {{ux|ro|Am în cont douăzeci '''și''' trei de mii șase sute patruzeci '''și''' unu de lei.|I have twenty'''-'''three thousand six hundred forty'''-'''one lei in my account.}}
+##: {{ux|ro|― Câte ture ai alergat? ― Două '''și''' jumătate.|“How many laps did you run?” “Two '''and''' a half.”}}
+## {{ng|Used as a question by itself in dialogue to mean “and what?”.}}
+## {{lb|ro|informal}} {{ng|Connects two items in close causal connection and a one-to-one proportion, typically in elliptical sentences.}}
+##: {{ux|ro|În Japonia, procesul '''și''' condamnarea.|In Japan, '''for every''' trial a conviction.}}
+##: {{ux|ro|Nu este realist în marketingul telefonic apelul '''și''' vânzarea.|A sale '''for every''' call is unrealistic in telephone marketing.}}
+##: {{ux|ro|În toamna lui 1940, în Londra era ziua '''și''' bombardamentul.|In the autumn of 1940, in London there would be an air raid '''every''' day.}}
+## {{lb|ro|informal}} {{ng|Ironically, within an exclamation, connects a topic of discussion with a trait or association deemed incompatible.}}
+##: {{ux|ro|„Republica Democrată Germană”? Ei '''și''' democrația!|“German Democratic Republic”? They '''and''' democracy—what a joke!}}
+## {{ng|Placed between two repetitions of a noun to remark on the diversity in the ranks of said noun.}}
+##: {{ux|ro|Orice profesor știe că există copii '''și''' copii.|Any teacher knows there are all sorts of children.|lit=children '''and''' children}}
+## {{ng|Placed between two repetitions of a word to signify incessantness.}}
+##: {{ux|ro|Temperatura urcă '''și''' urcă.|The temperature rises '''and''' rises.}}
+# {{lb|ro|Northwestern|_|Transylvania}} {{syn of|ro|să}}: [[to]], [[in order to]]
+
+====Adverb====
+{{ro-adv}}
+
+# [[also]]
+# [[even]]
+# [[already]]
+# [[immediately]]
+
+===Etymology 2===
+{{nonlemma}}
+
+====Pronoun====
+{{head|ro|pronoun}}
+
+# {{n-g|form of {{m|ro|își}} in hyphenated compounds}} e.g. {{m|ro|[[să]]-și}}
+
+===Further reading===
+* {{R:DEX}}

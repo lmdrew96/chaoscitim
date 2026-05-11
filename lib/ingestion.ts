@@ -4,6 +4,7 @@ import { analyze } from './udpipe';
 import { parseConllu } from './conllu';
 import type { ParsedMwt, ParsedSentence, ParsedToken } from './conllu';
 import { classifyAllSe } from './se-rule';
+import { resolveGlosses, shouldGloss } from './glosses-resolve';
 import { getDb } from '../db';
 import {
   texts,
@@ -32,6 +33,10 @@ export interface IngestInput {
   ownerId?: string | null;
   visibility: Visibility;
   model?: string;
+  /** Skip Wiktionary fetch — use overrides + cache only. Cache misses become null. */
+  offlineGlosses?: boolean;
+  glossCachePath?: string;
+  glossOverridesPath?: string;
 }
 
 export interface PreparedIngestion {
@@ -44,6 +49,11 @@ export interface PreparedIngestion {
     wordCount: number;
     seClassifications: number;
     mwtCount: number;
+    glossesResolved: number;
+    glossesMissing: number;
+    glossesFromOverride: number;
+    glossesFromCache: number;
+    glossesFromFetch: number;
   };
 }
 
@@ -77,6 +87,24 @@ export async function prepareIngestion(
     charEnd: offsets[i]!.charEnd,
   }));
 
+  // Collect glossable lemmas before building token rows so we can resolve
+  // glosses in one batched Wiktionary call and attach them inline.
+  const glossLookups: { lemma: string; upos: typeof sentences[number]['tokens'][number]['upos'] }[] = [];
+  const seenLemmas = new Set<string>();
+  for (const sentence of sentences) {
+    for (const token of sentence.tokens) {
+      if (!shouldGloss(token.upos)) continue;
+      if (!token.lemma || seenLemmas.has(token.lemma)) continue;
+      seenLemmas.add(token.lemma);
+      glossLookups.push({ lemma: token.lemma, upos: token.upos });
+    }
+  }
+  const glossResult = await resolveGlosses(glossLookups, {
+    offline: input.offlineGlosses ?? false,
+    cachePath: input.glossCachePath,
+    overridesPath: input.glossOverridesPath,
+  });
+
   const tokenRows: NewTextToken[] = [];
   let wordCount = 0;
   let seClassifications = 0;
@@ -91,6 +119,9 @@ export async function prepareIngestion(
     for (const token of sentence.tokens) {
       if (token.upos !== 'PUNCT') wordCount++;
       const mwt = mwtMap.get(token.id);
+      const glossEn = shouldGloss(token.upos)
+        ? glossResult.glosses.get(token.lemma) ?? null
+        : null;
       tokenRows.push({
         textId,
         sentenceId: sentence.sentenceId,
@@ -103,7 +134,7 @@ export async function prepareIngestion(
         headPosition: token.head,
         deprel: token.deprel,
         enrichedSeReading: seReadings.get(token.id) ?? null,
-        glossEn: null,
+        glossEn,
         ambiguityAlternatives: null,
         mwtId: mwt?.mwtId ?? null,
         mwtSurfaceForm: mwt?.mwtSurfaceForm ?? null,
@@ -144,6 +175,11 @@ export async function prepareIngestion(
       wordCount,
       seClassifications,
       mwtCount,
+      glossesResolved: glossResult.diagnostics.total - glossResult.diagnostics.missing,
+      glossesMissing: glossResult.diagnostics.missing,
+      glossesFromOverride: glossResult.diagnostics.fromOverride,
+      glossesFromCache: glossResult.diagnostics.fromCache,
+      glossesFromFetch: glossResult.diagnostics.fromFetch,
     },
   };
 }

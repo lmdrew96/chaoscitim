@@ -1,0 +1,57 @@
+{{also|Appendix:Variations of "casa"}}
+==Megleno-Romanian==
+
+===Etymology===
+{{inh+|ruq|la|casa}}.<ref>https://www.dex.ro/casa</ref>
+
+===Noun===
+{{head|ruq|noun|g=f}}
+
+# [[house]]
+
+===References===
+* {{R:ruq:PA}}
+<references/>
+
+==Romanian==
+
+===Alternative forms===
+* {{alt|ro|касэ||post-1930s (Moldovan) Cyrillic spelling}}
+
+===Etymology===
+{{inh+|ro|la|casa}}. Compare {{cog|rup|casã|}}.
+
+===Pronunciation===
+* {{IPA|ro|[ˈka.sə]}}
+* {{audio|ro|Ro-casă.oga}}
+* {{rhymes|ro|asə|s=2}}
+* {{audio|ro|LL-Q7913 (ron)-Filosoful-casă.wav}}
+
+===Noun===
+{{ro-noun|f|case|pl2=căși|pl3=căsi|pl4=căsuri}}
+
+# [[house]], [[dwellinghouse]]
+# [[building]] used for a specific purpose
+## {{l|ro|casă de schimb}} &ndash; [[bureau de change]]
+## {{l|ro|casă de cultură}} &ndash; [[community centre]]
+## {{l|ro|casă de economii}} &ndash; [[savings bank]]
+## {{l|ro|casă de modă}} &ndash; [[fashion house]]
+# [[till]], [[checkout]] (in a shop)
+
+====Declension====
+{{ro-noun-f-ă|cas}}
+
+====Derived terms====
+* {{l|ro|acasă}}
+* {{l|ro|căsoaie}}
+* {{l|ro|căsuță}}
+
+====Related terms====
+* {{l|ro|căsar}}
+* {{l|ro|căsător}}
+* {{l|ro|căsători}}
+
+===Further reading===
+* {{R:DEX}}
+
+{{C|ro|Buildings}}

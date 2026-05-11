@@ -40,6 +40,9 @@ Optional:
   --tags A,B,C            Comma-separated topic tags
   --owner ID              Clerk user id (omit for seed library)
   --model NAME            UDPipe model id   (default: pinned latest)
+  --no-glosses            Skip Wiktionary fetch; resolve glosses from cache/overrides only
+  --gloss-cache PATH      Override gloss cache path (default: data/glosses-cache.json)
+  --gloss-overrides PATH  Override curated overrides path (default: data/seed-glosses.json)
   --dry-run               Run pipeline, print summary, do NOT write to DB
   --help                  Show this help
 
@@ -64,6 +67,9 @@ const cli = parseArgs({
     tags: { type: 'string' },
     owner: { type: 'string' },
     model: { type: 'string' },
+    'no-glosses': { type: 'boolean' },
+    'gloss-cache': { type: 'string' },
+    'gloss-overrides': { type: 'string' },
     'dry-run': { type: 'boolean' },
     help: { type: 'boolean' },
   },
@@ -172,6 +178,9 @@ async function main(): Promise<void> {
     ownerId: args.owner ?? null,
     visibility: visibility.data,
     model: args.model,
+    offlineGlosses: args['no-glosses'],
+    glossCachePath: args['gloss-cache'],
+    glossOverridesPath: args['gloss-overrides'],
   };
 
   console.log(`→ analyzing "${input.title}" (${raw.length.toLocaleString()} chars)...`);
@@ -184,6 +193,7 @@ async function main(): Promise<void> {
   console.log(`    multi-word tokens:   ${prepared.diagnostics.mwtCount}`);
   console.log(`    se classifications:  ${prepared.diagnostics.seClassifications}`);
   console.log(`    diacritics restored: ${prepared.diagnostics.diacriticsChanged ? 'yes' : 'no'}`);
+  console.log(`    glosses resolved:    ${prepared.diagnostics.glossesResolved} (override ${prepared.diagnostics.glossesFromOverride}, cache ${prepared.diagnostics.glossesFromCache}, fetch ${prepared.diagnostics.glossesFromFetch}; missing ${prepared.diagnostics.glossesMissing})`);
   console.log(`    analyzer model:      ${prepared.textRow.analyzerModelVersion}`);
   console.log(`    analyzer license:    ${prepared.textRow.analyzerLicense}`);
   console.log(`    text id (would be):  ${prepared.textRow.id}`);

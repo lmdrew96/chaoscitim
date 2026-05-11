@@ -1,0 +1,53 @@
+{{also|Appendix:Variations of "in"}}
+
+==Mizo==
+
+===Etymology===
+From {{inh|lus|tbq-kuk-pro|*ʔiin||to drink}}, a word missing from VanBik but present in [https://stedt.berkeley.edu/~stedt-cgi/rootcanal.pl/etymon/1705 STEDT].
+
+===Verb===
+{{lus-verb}}
+
+# to [[drink]]
+
+==Northern Kurdish==
+
+===Noun===
+{{kmr-noun|f}}
+
+# [[Friday]]
+
+===See also===
+{{list:days of the week/kmr}}
+
+==Romanian==
+
+===Alternative forms===
+* {{alt|ro|ын||new cyrl}}
+* {{alt|ro|-n||contracted form, after a vowel}}
+
+===Etymology===
+{{etymon|ro|:inh|la:in<id:preposition>|id=in|text=+}} Cognate with {{cog|en|in}}.
+
+===Pronunciation===
+* {{IPA|ro|/ɨn/}}
+* {{audio|ro|LL-Q7913 (ron)-Andreea Teodoraa-în.wav}}
+* {{rhymes|ro|ɨn|s=1}}
+
+===Preposition===
+{{ro-prep|a}}
+
+# [[in]], [[into]], [[within]]
+# {{lb|ro|of|dates|months|years}} [[in]], [[on]]
+
+====Usage notes====
+Any time that one wishes to say "in a", {{m|ro|într-un}} or {{m|ro|într-o}} is used, depending on the gender of the noun, but ''not'' {{incorrect|în un}} or {{incorrect|în o}}.
+
+====Related terms====
+* {{l|ro|în-}}
+
+====See also====
+* {{l|ro|întru}}
+
+===Further reading===
+* {{R:DEX}}
