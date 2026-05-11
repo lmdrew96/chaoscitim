@@ -27,7 +27,7 @@ export function TokenSpan({
   const escalate = () => setTier((t) => (((t + 1) % 4) as Tier));
 
   return (
-    <span className="rounded bg-tier-3/[0.04] px-0.5">
+    <span className="rounded bg-tier-3/[0.12] px-1 py-0.5 outline outline-1 outline-tier-3/30">
       {tokens.map((token, idx) => {
         const prev = idx > 0 ? tokens[idx - 1]! : null;
         const space = prev && shouldPrependSpace(prev, token) ? ' ' : '';
