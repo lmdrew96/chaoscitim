@@ -29,7 +29,7 @@ export function TokenWord({
   const [tier, setTier] = useState<Tier>(0);
 
   const escalate = () => {
-    setTier((t) => (t < 3 ? ((t + 1) as Tier) : t));
+    setTier((t) => (((t + 1) % 4) as Tier));
   };
 
   // Tier 1 — morphology label. Some tokens (e.g., conjunctions) have no
