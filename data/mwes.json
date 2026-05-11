@@ -1,0 +1,46 @@
+{
+  "_comment": "Lemmas verified against UDPipe RRT (model romanian-rrt-ud-2.17-251125). Reflexive clitics lemmatize to 'sine' for 3rd-person and to the corresponding personal pronoun (eu/tu/noi/voi) for 1st/2nd. Compound past tenses insert AUX 'avea' between clitic and main verb. v1 ships canonical-tense entries; compound-tense variants for the highest-frequency idioms can be added as separate entries. Verify any new entry via: pnpm tsx scripts/inspect-lemmas.ts \"<sentence>\"",
+
+  "entries": [
+    { "lemmas": ["sine", "da", "seamă"], "gloss": "to realize", "notes": "lit. 'to give oneself account' — covers present-tense 3rd person reflexive: își dă seama" },
+    { "lemmas": ["sine", "avea", "da", "seamă"], "gloss": "to realize", "notes": "compound past, 3rd person: și-a dat seama / și-au dat seama" },
+    { "lemmas": ["eu", "avea", "da", "seamă"], "gloss": "to realize", "notes": "compound past, 1st person: mi-am dat seama / ne-am dat seama" },
+    { "lemmas": ["tu", "avea", "da", "seamă"], "gloss": "to realize", "notes": "compound past, 2nd person: ți-ai dat seama / v-ați dat seama" },
+
+    { "lemmas": ["bag", "de", "seamă"], "gloss": "to notice", "notes": "lit. 'to put into account'; UDPipe misparses 'bag' as NOUN but lemma is reliable" },
+    { "lemmas": ["băga", "de", "seamă"], "gloss": "to notice", "notes": "infinitive / other forms of a băga de seamă" },
+    { "lemmas": ["băga", "în", "seamă"], "gloss": "to acknowledge", "notes": "lit. 'to put in account'" },
+
+    { "lemmas": ["ține", "minte"], "gloss": "to remember", "notes": "lit. 'to hold mind'" },
+    { "lemmas": ["avea", "grijă"], "gloss": "to take care", "notes": "lit. 'to have care'" },
+    { "lemmas": ["avea", "dreptate"], "gloss": "to be right", "notes": "lit. 'to have rightness'" },
+    { "lemmas": ["avea", "nevoie"], "gloss": "to need", "notes": "lit. 'to have need'" },
+    { "lemmas": ["avea", "loc"], "gloss": "to take place", "notes": "lit. 'to have place'" },
+
+    { "lemmas": ["face", "cunoștință"], "gloss": "to meet", "notes": "lit. 'to make acquaintance'" },
+    { "lemmas": ["lua", "parte"], "gloss": "to take part", "notes": "neutral" },
+    { "lemmas": ["pune", "capăt"], "gloss": "to put an end to", "notes": "lit. 'to put end'" },
+    { "lemmas": ["da", "naștere"], "gloss": "to give birth", "notes": "also: 'to give rise to'" },
+    { "lemmas": ["sări", "în", "ochi"], "gloss": "to be obvious", "notes": "lit. 'to jump in eyes'" },
+
+    { "lemmas": ["uita", "la"], "gloss": "to look at", "notes": "always reflexive (a se uita la); seed match assumes preceding 'se'/'mă'/'te' clitic in real text" },
+
+    { "lemmas": ["de", "altfel"], "gloss": "besides", "register": "neutral" },
+    { "lemmas": ["în", "plus"], "gloss": "in addition", "register": "neutral" },
+    { "lemmas": ["de", "fapt"], "gloss": "in fact", "register": "neutral" },
+    { "lemmas": ["în", "general"], "gloss": "in general", "register": "neutral" },
+    { "lemmas": ["în", "schimb"], "gloss": "on the other hand", "register": "neutral" },
+    { "lemmas": ["pe", "de", "alt", "parte"], "gloss": "on the other hand", "register": "neutral" },
+    { "lemmas": ["fără", "îndoială"], "gloss": "without doubt", "register": "neutral" },
+    { "lemmas": ["cu", "siguranță"], "gloss": "certainly", "register": "neutral" },
+    { "lemmas": ["în", "primul", "rând"], "gloss": "first of all", "register": "neutral", "notes": "lit. 'in the first row'" },
+    { "lemmas": ["la", "urmă", "urmă"], "gloss": "after all", "register": "neutral", "notes": "la urma urmei — 'at the end of ends'" },
+    { "lemmas": ["mai", "mult", "sau", "mai", "puțin"], "gloss": "more or less", "register": "neutral" },
+    { "lemmas": ["din", "când", "în", "când"], "gloss": "from time to time", "register": "neutral" },
+    { "lemmas": ["pe", "de", "rost"], "gloss": "by heart", "notes": "memorized" },
+    { "lemmas": ["cu", "toate", "că"], "gloss": "although", "register": "neutral", "notes": "subordinating conjunction phrase" },
+    { "lemmas": ["în", "loc", "de"], "gloss": "instead of", "register": "neutral" },
+    { "lemmas": ["în", "loc", "să"], "gloss": "instead of (doing)", "register": "neutral", "notes": "followed by subjunctive verb" },
+    { "lemmas": ["după", "cum"], "gloss": "just as", "register": "neutral" }
+  ]
+}

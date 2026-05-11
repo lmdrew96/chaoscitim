@@ -4,50 +4,64 @@ import { useState } from 'react';
 import type { TextToken } from '@/db/schema';
 import { formatTier1, formatTier2 } from '@/lib/glosses';
 
-type Tier = 0 | 1 | 2 | 3;
+export type Tier = 0 | 1 | 2 | 3;
 
-const TIER_COLORS: Record<Tier, string> = {
+export const TIER_COLORS: Record<Tier, string> = {
   0: '',
   1: 'underline decoration-tier-1 decoration-2 underline-offset-4',
   2: 'underline decoration-tier-2 decoration-2 underline-offset-4',
   3: 'underline decoration-tier-3 decoration-2 underline-offset-4',
 };
 
-const PILL_COLORS: Record<Exclude<Tier, 0>, string> = {
+export const PILL_COLORS: Record<Exclude<Tier, 0>, string> = {
   1: 'bg-tier-1/15 text-tier-1',
   2: 'bg-tier-2/15 text-tier-2',
   3: 'bg-tier-3/20 text-tier-3',
 };
 
+interface TokenWordProps {
+  token: TextToken;
+  head: TextToken | null;
+  /**
+   * Controlled tier — when provided, the component's internal state is
+   * bypassed. Used by TokenSpan to share tier state across an MWE span.
+   */
+  tier?: Tier;
+  onEscalate?: () => void;
+  /**
+   * When true, suppress the per-token tier-3 pill. Set by TokenSpan so a
+   * single span-level gloss is shown instead of one pill per token.
+   */
+  suppressTier3Pill?: boolean;
+}
+
 export function TokenWord({
   token,
   head,
-}: {
-  token: TextToken;
-  head: TextToken | null;
-}) {
-  const [tier, setTier] = useState<Tier>(0);
+  tier: controlledTier,
+  onEscalate,
+  suppressTier3Pill,
+}: TokenWordProps) {
+  const [uncontrolledTier, setUncontrolledTier] = useState<Tier>(0);
+  const isControlled = controlledTier !== undefined;
+  const tier = isControlled ? controlledTier : uncontrolledTier;
 
   const escalate = () => {
-    setTier((t) => (((t + 1) % 4) as Tier));
+    if (isControlled) {
+      onEscalate?.();
+    } else {
+      setUncontrolledTier((t) => (((t + 1) % 4) as Tier));
+    }
   };
 
-  // Tier 1 — morphology label. Some tokens (e.g., conjunctions) have no
-  // useful morphology; those get a graceful "—".
   const tier1Label = formatTier1(token.upos, token.features ?? null);
 
-  // Tier 2 — grammatical role. For verbs as roots, head is null and we
-  // say "main verb"; otherwise "{role} of {head-lemma}".
-  // Use the head's lemma when head is a verb (reads naturally with "of");
-  // surface form otherwise.
   const headLabel =
     head && (head.upos === 'VERB' || head.upos === 'AUX')
       ? head.lemma
       : (head?.surfaceForm ?? null);
   const tier2Label = formatTier2(token.deprel, headLabel);
 
-  // Tier 3 — gloss + lemma. gloss_en is null until the gloss-source patch
-  // lands; for now show lemma only.
   const tier3Label = token.glossEn ? `${token.glossEn} · ${token.lemma}` : token.lemma;
 
   return (
@@ -77,7 +91,7 @@ export function TokenWord({
               {renderEmphasis(tier2Label)}
             </span>
           ) : null}
-          {tier >= 3 ? (
+          {tier >= 3 && !suppressTier3Pill ? (
             <span
               className={`rounded px-1.5 py-0.5 font-mono text-[0.7rem] ${PILL_COLORS[3]}`}
             >
