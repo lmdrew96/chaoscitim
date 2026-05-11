@@ -81,10 +81,43 @@ const VOICE_LABELS: Record<string, string> = {
 // is the unmarked default; suppressing it cuts pill noise dramatically.
 const MARKED_CASE = new Set(['Dat', 'Gen', 'Voc', 'Dat,Gen']);
 
-export function formatTier1(upos: UPos, features: Features | null): string | null {
-  if (!features) return null;
+// Plain-English part-of-speech labels. UDPipe's UPos tags are universal
+// dependency abbreviations; a learner needs the spelled-out word.
+const POS_LABELS: Partial<Record<UPos, string>> = {
+  NOUN: 'noun',
+  PROPN: 'proper noun',
+  ADJ: 'adjective',
+  VERB: 'verb',
+  AUX: 'auxiliary verb',
+  ADV: 'adverb',
+  ADP: 'preposition',
+  DET: 'article',
+  PRON: 'pronoun',
+  CCONJ: 'conjunction',
+  SCONJ: 'subordinator',
+  NUM: 'number',
+  PART: 'particle',
+  INTJ: 'interjection',
+};
 
+export function formatTier1(upos: UPos, features: Features | null): string | null {
   const parts: string[] = [];
+  const posLabel = POS_LABELS[upos];
+  if (posLabel) parts.push(posLabel);
+
+  // Verb-form overrides the bare "verb" label when the form itself is
+  // more informative (participle / infinitive / gerund).
+  if ((upos === 'VERB' || upos === 'AUX') && features) {
+    if (features.VerbForm === 'Part') {
+      parts[parts.length - 1] = 'past participle';
+    } else if (features.VerbForm === 'Inf') {
+      parts[parts.length - 1] = VERBFORM_LABELS.Inf!;
+    } else if (features.VerbForm === 'Ger') {
+      parts[parts.length - 1] = VERBFORM_LABELS.Ger!;
+    }
+  }
+
+  if (!features) return parts.length > 0 ? parts.join(' · ') : null;
 
   // Nouns: definiteness is the most distinctive Romanian fact (suffixed
   // article); show case only when it's marked (not nom/acc). Skip gender —
@@ -97,7 +130,6 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
   }
 
   // Adjectives: number + gender (agreement is the point of adjectives).
-  // Drop case — adjectives agree with their noun, so case is redundant info.
   else if (upos === 'ADJ') {
     if (features.Number) parts.push(NUMBER_LABELS[features.Number] ?? features.Number);
     if (features.Gender) parts.push(GENDER_LABELS[features.Gender] ?? features.Gender);
@@ -120,16 +152,13 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
   // Finite verbs: person + tense, plus mood if it's non-default.
   // Skip number (implicit in person), skip voice (active is default).
   else if (upos === 'VERB' || upos === 'AUX') {
-    if (features.VerbForm === 'Part') {
-      parts.push('past participle');
-    } else if (features.VerbForm === 'Inf') {
-      parts.push(VERBFORM_LABELS.Inf!);
-    } else if (features.VerbForm === 'Ger') {
-      parts.push(VERBFORM_LABELS.Ger!);
-    } else {
+    const isNonFinite =
+      features.VerbForm === 'Part' ||
+      features.VerbForm === 'Inf' ||
+      features.VerbForm === 'Ger';
+    if (!isNonFinite) {
       if (features.Person) parts.push(PERSON_LABELS[features.Person] ?? features.Person);
       if (features.Tense) parts.push(TENSE_LABELS[features.Tense] ?? features.Tense);
-      // Show mood only when it's NOT the default indicative ("statement").
       if (features.Mood && features.Mood !== 'Ind') {
         parts.push(MOOD_LABELS[features.Mood] ?? features.Mood);
       }
@@ -138,9 +167,6 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
       parts.push(VOICE_LABELS[features.Voice] ?? features.Voice);
     }
   }
-
-  // Everything else (NUM, ADV, ADP, CCONJ, SCONJ, PART, INTJ, X, SYM):
-  // no useful tier-1 morphology. Return null and let the UI hide the pill.
 
   if (parts.length === 0) return null;
   return parts.join(' · ');
