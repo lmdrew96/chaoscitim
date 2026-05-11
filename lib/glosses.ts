@@ -77,40 +77,70 @@ const VOICE_LABELS: Record<string, string> = {
  * (e.g., punctuation, conjunctions). The UI should hide tier-1 in that
  * case rather than show an empty pill.
  */
+// Cases that are MARKED in Romanian — worth surfacing at tier 1. Nom/Acc
+// is the unmarked default; suppressing it cuts pill noise dramatically.
+const MARKED_CASE = new Set(['Dat', 'Gen', 'Voc', 'Dat,Gen']);
+
 export function formatTier1(upos: UPos, features: Features | null): string | null {
   if (!features) return null;
 
-  // Order matters: this is the order labels appear in the rendered string.
   const parts: string[] = [];
 
-  // For nominals and adjectives: gender + number + case + definiteness.
-  if (
-    upos === 'NOUN' ||
-    upos === 'PROPN' ||
-    upos === 'ADJ' ||
-    upos === 'PRON' ||
-    upos === 'DET' ||
-    upos === 'NUM'
-  ) {
-    if (features.Gender) parts.push(GENDER_LABELS[features.Gender] ?? features.Gender);
+  // Nouns: definiteness is the most distinctive Romanian fact (suffixed
+  // article); show case only when it's marked (not nom/acc). Skip gender —
+  // it's available in features data but rarely needed for parsing.
+  if (upos === 'NOUN' || upos === 'PROPN') {
+    if (features.Definite) parts.push(DEFINITE_LABELS[features.Definite] ?? features.Definite);
+    if (features.Case && MARKED_CASE.has(features.Case)) {
+      parts.push(CASE_LABELS[features.Case] ?? features.Case);
+    }
+  }
+
+  // Adjectives: number + gender (agreement is the point of adjectives).
+  // Drop case — adjectives agree with their noun, so case is redundant info.
+  else if (upos === 'ADJ') {
     if (features.Number) parts.push(NUMBER_LABELS[features.Number] ?? features.Number);
-    if (features.Case) parts.push(CASE_LABELS[features.Case] ?? features.Case);
+    if (features.Gender) parts.push(GENDER_LABELS[features.Gender] ?? features.Gender);
+  }
+
+  // Pronouns: person + marked-case + reflexive flag.
+  else if (upos === 'PRON') {
+    if (features.Person) parts.push(PERSON_LABELS[features.Person] ?? features.Person);
+    if (features.Case && MARKED_CASE.has(features.Case)) {
+      parts.push(CASE_LABELS[features.Case] ?? features.Case);
+    }
+    if (features.Reflex === 'Yes') parts.push('reflexive');
+  }
+
+  // Determiners: just definiteness, if any.
+  else if (upos === 'DET') {
     if (features.Definite) parts.push(DEFINITE_LABELS[features.Definite] ?? features.Definite);
   }
 
-  // Verbs: person + number + tense + mood (+ voice if non-default).
-  if (upos === 'VERB' || upos === 'AUX') {
-    if (features.Person) parts.push(PERSON_LABELS[features.Person] ?? features.Person);
-    if (features.Number) parts.push(NUMBER_LABELS[features.Number] ?? features.Number);
-    if (features.Tense) parts.push(TENSE_LABELS[features.Tense] ?? features.Tense);
-    if (features.Mood) parts.push(MOOD_LABELS[features.Mood] ?? features.Mood);
-    else if (features.VerbForm) {
-      parts.push(VERBFORM_LABELS[features.VerbForm] ?? features.VerbForm);
+  // Finite verbs: person + tense, plus mood if it's non-default.
+  // Skip number (implicit in person), skip voice (active is default).
+  else if (upos === 'VERB' || upos === 'AUX') {
+    if (features.VerbForm === 'Part') {
+      parts.push('past participle');
+    } else if (features.VerbForm === 'Inf') {
+      parts.push(VERBFORM_LABELS.Inf!);
+    } else if (features.VerbForm === 'Ger') {
+      parts.push(VERBFORM_LABELS.Ger!);
+    } else {
+      if (features.Person) parts.push(PERSON_LABELS[features.Person] ?? features.Person);
+      if (features.Tense) parts.push(TENSE_LABELS[features.Tense] ?? features.Tense);
+      // Show mood only when it's NOT the default indicative ("statement").
+      if (features.Mood && features.Mood !== 'Ind') {
+        parts.push(MOOD_LABELS[features.Mood] ?? features.Mood);
+      }
     }
     if (features.Voice && features.Voice !== 'Act') {
       parts.push(VOICE_LABELS[features.Voice] ?? features.Voice);
     }
   }
+
+  // Everything else (NUM, ADV, ADP, CCONJ, SCONJ, PART, INTJ, X, SYM):
+  // no useful tier-1 morphology. Return null and let the UI hide the pill.
 
   if (parts.length === 0) return null;
   return parts.join(' · ');
@@ -137,6 +167,7 @@ const DEPREL_LABELS: Record<string, string> = {
   expl: 'placeholder for',
   'expl:pass': 'passive marker for',
   'expl:pv': 'reflexive "se" for',
+  'expl:poss': 'possessive reflexive for',
   nmod: 'modifier of',
   amod: 'describes',
   nummod: 'counts',
