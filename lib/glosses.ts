@@ -8,59 +8,60 @@
 
 import type { Features, UPos } from '@/db/types';
 
-// Compact case labels (incl. UD syncretic forms emitted by UDPipe-Romanian).
+// Plain-English labels (incl. UD syncretic forms emitted by UDPipe-Romanian).
+// Cases describe *what role the form plays* rather than naming the case directly.
 const CASE_LABELS: Record<string, string> = {
-  Nom: 'nom',
-  Acc: 'acc',
-  Dat: 'dat',
-  Gen: 'gen',
-  Voc: 'voc',
-  'Acc,Nom': 'nom/acc',
-  'Dat,Gen': 'dat/gen',
+  Nom: 'subject form',
+  Acc: 'object form',
+  Dat: 'to/for form',
+  Gen: 'of form',
+  Voc: 'calling form',
+  'Acc,Nom': 'subject/object form',
+  'Dat,Gen': 'to/of form',
 };
 
 const NUMBER_LABELS: Record<string, string> = {
-  Sing: 'sg',
-  Plur: 'pl',
+  Sing: 'singular',
+  Plur: 'plural',
 };
 
 const GENDER_LABELS: Record<string, string> = {
-  Masc: 'masc',
-  Fem: 'fem',
-  Neut: 'neut',
+  Masc: 'masculine',
+  Fem: 'feminine',
+  Neut: 'neuter',
 };
 
 const TENSE_LABELS: Record<string, string> = {
   Pres: 'present',
   Past: 'past',
-  Imp: 'imperfect',
+  Imp: 'was-doing form',
   Fut: 'future',
-  Pqp: 'pluperfect',
+  Pqp: 'had-done form',
 };
 
 const MOOD_LABELS: Record<string, string> = {
-  Ind: 'indicative',
-  Sub: 'subjunctive',
-  Imp: 'imperative',
-  Cnd: 'conditional',
+  Ind: 'statement',
+  Sub: 'subjunctive "să"',
+  Imp: 'command',
+  Cnd: 'would-form',
 };
 
 const VERBFORM_LABELS: Record<string, string> = {
-  Fin: 'finite',
-  Inf: 'infinitive',
+  Fin: 'conjugated',
+  Inf: 'infinitive "a …"',
   Part: 'participle',
-  Ger: 'gerund',
+  Ger: '-ing form',
 };
 
 const PERSON_LABELS: Record<string, string> = {
-  '1': '1st',
-  '2': '2nd',
-  '3': '3rd',
+  '1': 'I/we',
+  '2': 'you',
+  '3': 'he/she/they',
 };
 
 const DEFINITE_LABELS: Record<string, string> = {
-  Def: 'definite',
-  Ind: 'indefinite',
+  Def: 'the',
+  Ind: 'a/an',
 };
 
 const VOICE_LABELS: Record<string, string> = {
@@ -112,7 +113,7 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
   }
 
   if (parts.length === 0) return null;
-  return parts.join(' ');
+  return parts.join(' · ');
 }
 
 /**
@@ -121,40 +122,40 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
  */
 const DEPREL_LABELS: Record<string, string> = {
   root: 'main verb',
-  nsubj: 'subject of',
-  'nsubj:pass': 'passive subject of',
-  obj: 'direct object of',
-  iobj: 'indirect object of',
-  obl: 'oblique modifier of',
-  'obl:agent': 'agent of',
-  vocative: 'vocative addressing',
-  ccomp: 'clausal complement of',
-  xcomp: 'open complement of',
-  expl: 'expletive of',
-  'expl:pass': 'passive marker of',
-  'expl:pv': 'reflexive marker of',
-  nmod: 'nominal modifier of',
-  amod: 'adjective modifier of',
-  nummod: 'numeric modifier of',
-  acl: 'relative clause of',
-  'acl:relcl': 'relative clause of',
-  advcl: 'adverbial clause of',
-  advmod: 'adverbial modifier of',
-  aux: 'auxiliary of',
-  'aux:pass': 'passive auxiliary of',
-  cop: 'copula of',
-  mark: 'subordinating marker of',
-  det: 'determiner of',
-  case: 'preposition for',
-  cc: 'coordinator',
-  conj: 'conjunct with',
-  appos: 'apposition to',
+  nsubj: 'who/what does',
+  'nsubj:pass': 'who/what receives',
+  obj: 'what acts on',
+  iobj: 'who/what it is for',
+  obl: 'when/where/how of',
+  'obl:agent': 'done by',
+  vocative: 'calling',
+  ccomp: 'what (clause)',
+  xcomp: 'what tries to do',
+  expl: 'placeholder for',
+  'expl:pass': 'passive marker for',
+  'expl:pv': 'reflexive "se" for',
+  nmod: 'of',
+  amod: 'describes',
+  nummod: 'counts',
+  acl: 'describes (clause)',
+  'acl:relcl': 'describes (clause)',
+  advcl: 'when/why of',
+  advmod: 'how/when of',
+  aux: 'helps form',
+  'aux:pass': 'passive helper for',
+  cop: 'links to (to be)',
+  mark: 'introduces',
+  det: 'marks',
+  case: 'connects to',
+  cc: 'and/or word',
+  conj: 'joined to',
+  appos: 'another name for',
   fixed: 'part of',
   flat: 'part of',
   compound: 'compound with',
-  parataxis: 'parataxis with',
+  parataxis: 'side-by-side with',
   punct: 'punctuation',
-  dep: 'dependent of',
+  dep: 'connected to',
 };
 
 /**
