@@ -16,16 +16,8 @@ export default async function Home() {
         <h1 className="text-3xl font-semibold tracking-tight">ChaosCitim</h1>
         <div className="flex items-center gap-3 text-sm">
           <Show when="signed-out">
-            <SignInButton mode="modal">
-              <button className="rounded-md border border-foreground/20 px-3 py-1.5 hover:bg-foreground/6">
-                Sign in
-              </button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <button className="rounded-md bg-foreground px-3 py-1.5 text-background hover:opacity-90">
-                Sign up
-              </button>
-            </SignUpButton>
+            <SignInButton mode="modal" />
+            <SignUpButton mode="modal" />
           </Show>
           <Show when="signed-in">
             <UserButton />
