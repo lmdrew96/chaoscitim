@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
 import { getReadingPayload } from '@/lib/read';
 import { Reader } from './reader';
 
@@ -11,7 +12,8 @@ export default async function ReadPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const payload = await getReadingPayload(id);
+  const { userId } = await auth();
+  const payload = await getReadingPayload(id, userId);
   if (!payload) notFound();
 
   return (

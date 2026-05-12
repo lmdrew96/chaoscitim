@@ -6,7 +6,7 @@
  * a server component that hands the result to the client Reader.
  */
 
-import { and, asc, eq, isNull } from 'drizzle-orm';
+import { and, asc, eq, isNull, or } from 'drizzle-orm';
 import { getDb } from '@/db';
 import { texts, textSentences, textTokens } from '@/db/schema';
 import type {
@@ -24,13 +24,22 @@ export type SentenceWithTokens = TextSentence & {
   tokens: TextToken[];
 };
 
-export async function getReadingPayload(textId: string): Promise<ReadingPayload | null> {
+export async function getReadingPayload(
+  textId: string,
+  viewerUserId: string | null,
+): Promise<ReadingPayload | null> {
   const db = getDb();
 
   const [textRow] = await db
     .select()
     .from(texts)
-    .where(and(eq(texts.id, textId), isNull(texts.deletedAt)));
+    .where(
+      and(
+        eq(texts.id, textId),
+        isNull(texts.deletedAt),
+        readableBy(viewerUserId),
+      ),
+    );
   if (!textRow) return null;
 
   const sentenceRows = await db
@@ -61,11 +70,17 @@ export async function getReadingPayload(textId: string): Promise<ReadingPayload 
   return { text: textRow, sentences };
 }
 
-export async function listTexts(): Promise<Text[]> {
+export async function listTexts(viewerUserId: string | null): Promise<Text[]> {
   const db = getDb();
   return db
     .select()
     .from(texts)
-    .where(isNull(texts.deletedAt))
+    .where(and(isNull(texts.deletedAt), readableBy(viewerUserId)))
     .orderBy(asc(texts.createdAt));
+}
+
+function readableBy(viewerUserId: string | null) {
+  return viewerUserId
+    ? or(eq(texts.visibility, 'public_seed'), eq(texts.ownerId, viewerUserId))
+    : eq(texts.visibility, 'public_seed');
 }

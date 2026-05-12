@@ -9,6 +9,7 @@ export type SourceType =
   | 'friend_contributed'
   | 'byo_url'
   | 'byo_paste'
+  | 'byo_pdf'
   | 'byo_epub'
   | 'byo_clipboard';
 

@@ -13,7 +13,7 @@
  */
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { eq } from 'drizzle-orm';
+import { and, eq, isNull, or } from 'drizzle-orm';
 import { z } from 'zod';
 import { getDb } from '@/db';
 import { readingSessions, texts } from '@/db/schema';
@@ -43,9 +43,17 @@ export async function POST(req: Request) {
   const db = getDb();
 
   // Confirm the text exists. We don't gate on visibility here — public
-  // seeds are readable by anyone signed in; private/cohort gating is a
-  // later patch.
-  const [text] = await db.select({ id: texts.id }).from(texts).where(eq(texts.id, textId));
+  // seeds are readable by anyone signed in; private BYO texts are owner-only.
+  const [text] = await db
+    .select({ id: texts.id })
+    .from(texts)
+    .where(
+      and(
+        eq(texts.id, textId),
+        isNull(texts.deletedAt),
+        or(eq(texts.visibility, 'public_seed'), eq(texts.ownerId, userId)),
+      ),
+    );
   if (!text) {
     return NextResponse.json({ error: 'text_not_found' }, { status: 404 });
   }
