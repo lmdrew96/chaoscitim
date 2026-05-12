@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Show, SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 import { listTexts } from '@/lib/read';
 
 export const dynamic = 'force-dynamic';
@@ -8,7 +9,27 @@ export default async function Home() {
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-12">
-      <h1 className="text-3xl font-semibold tracking-tight">ChaosCitim</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-semibold tracking-tight">ChaosCitim</h1>
+        <div className="flex items-center gap-3 text-sm">
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button className="rounded-md border border-foreground/20 px-3 py-1.5 hover:bg-foreground/[0.06]">
+                Sign in
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="rounded-md bg-foreground px-3 py-1.5 text-background hover:opacity-90">
+                Sign up
+              </button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
+        </div>
+      </div>
+
       <p className="mt-1 text-sm opacity-70">
         Romanian-first reading companion. Tap a word to escalate from
         morphology → role → gloss.

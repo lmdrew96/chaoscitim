@@ -5,6 +5,7 @@ import type { TextToken } from '@/db/schema';
 import type { MWE } from '@/lib/mwe';
 import { TokenWord, PILL_COLORS, type Tier } from './token-word';
 import { shouldPrependSpace } from './spacing';
+import { useLogEvent } from './session-context';
 
 /**
  * Renders a contiguous run of tokens that belong to a single MWE span.
@@ -28,11 +29,35 @@ export function TokenSpan({
 }) {
   const [tier, setTier] = useState<Tier>(0);
   const [hovered, setHovered] = useState(false);
+  const logEvent = useLogEvent();
 
-  const escalate = () => setTier((t) => (((t + 1) % 4) as Tier));
+  // Log a tap for each component token in the span so the materializer
+  // sees coverage across the whole MWE, not just the one the user struck.
+  const emitSpanTap = (tierReached: Tier) => {
+    if (tierReached === 0) return;
+    for (const token of tokens) {
+      if (token.upos === 'PUNCT') continue;
+      logEvent({
+        type: 'tap',
+        textId: token.textId,
+        sentenceId: token.sentenceId,
+        tokenPosition: token.tokenPosition,
+        payload: { tier_reached: tierReached, mwe: true },
+      });
+    }
+  };
+
+  const escalate = () => {
+    setTier((t) => {
+      const next = ((t + 1) % 4) as Tier;
+      emitSpanTap(next);
+      return next;
+    });
+  };
   const jumpToTier3 = (e: React.MouseEvent) => {
     e.preventDefault();
     setTier(3);
+    emitSpanTap(3);
   };
 
   const showPeek = hovered && tier === 0;

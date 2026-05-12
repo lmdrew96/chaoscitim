@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { TextToken } from '@/db/schema';
 import { formatTier1, formatTier2 } from '@/lib/glosses';
+import { useLogEvent } from './session-context';
 
 export type Tier = 0 | 1 | 2 | 3;
 
@@ -46,13 +47,28 @@ export function TokenWord({
   const [hovered, setHovered] = useState(false);
   const isControlled = controlledTier !== undefined;
   const tier = isControlled ? controlledTier : uncontrolledTier;
+  const logEvent = useLogEvent();
+
+  const emitTap = (tierReached: Tier) => {
+    // Tier 0 collapses aren't tier escalations — skip the event log.
+    if (tierReached === 0) return;
+    logEvent({
+      type: 'tap',
+      textId: token.textId,
+      sentenceId: token.sentenceId,
+      tokenPosition: token.tokenPosition,
+      payload: { tier_reached: tierReached },
+    });
+  };
 
   const escalate = () => {
     if (isControlled) {
       onEscalate?.();
-    } else {
-      setUncontrolledTier((t) => (((t + 1) % 4) as Tier));
+      return;
     }
+    const next = ((uncontrolledTier + 1) % 4) as Tier;
+    setUncontrolledTier(next);
+    emitTap(next);
   };
 
   // Right-click jumps straight to tier 3 (English gloss). When controlled
@@ -62,6 +78,7 @@ export function TokenWord({
     if (isControlled) return;
     e.preventDefault();
     setUncontrolledTier(3);
+    emitTap(3);
   };
 
   const tier1Label = formatTier1(token.upos, token.features ?? null);

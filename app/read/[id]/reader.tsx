@@ -4,24 +4,35 @@ import { useMemo } from 'react';
 import type { ReadingPayload } from '@/lib/read';
 import type { TextToken } from '@/db/schema';
 import { findMWEMatches, loadMWETable, type MWEMatch } from '@/lib/mwe';
+import { useReadingSession } from '@/lib/session';
 import { TokenWord } from './token-word';
 import { TokenSpan } from './token-span';
 import { shouldPrependSpace } from './spacing';
+import { SessionContextProvider } from './session-context';
 
 export function Reader({ payload }: { payload: ReadingPayload }) {
   // MWE table is static — load once per render.
   const mweTable = useMemo(() => loadMWETable(), []);
 
+  // Mode picker isn't built yet; everyone starts in 'active'. The
+  // mode-change event will flow through logEvent once the picker lands.
+  const { logEvent } = useReadingSession({
+    textId: payload.text.id,
+    initialMode: 'active',
+  });
+
   return (
-    <article className="reading-prose mt-6">
-      {payload.sentences.map((sentence) => (
-        <SentenceP
-          key={sentence.sentenceId}
-          tokens={sentence.tokens}
-          mweTable={mweTable}
-        />
-      ))}
-    </article>
+    <SessionContextProvider value={logEvent}>
+      <article className="reading-prose mt-6">
+        {payload.sentences.map((sentence) => (
+          <SentenceP
+            key={sentence.sentenceId}
+            tokens={sentence.tokens}
+            mweTable={mweTable}
+          />
+        ))}
+      </article>
+    </SessionContextProvider>
   );
 }
 
