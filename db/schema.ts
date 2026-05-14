@@ -56,6 +56,10 @@ export const texts = pgTable(
     analyzerLicense: text('analyzer_license').$type<License>().notNull(),
     analyzedAt: timestamp('analyzed_at', { withTimezone: true }).notNull(),
 
+    // Set after contextual glosses are generated. Null means gloss_en_context
+    // has not been populated for this text's tokens yet.
+    glossModelVersion: text('gloss_model_version'),
+
     wordCount: integer('word_count').notNull(),
     sentenceCount: integer('sentence_count').notNull(),
 
@@ -135,6 +139,10 @@ export const textTokens = pgTable(
 
     enrichedSeReading: text('enriched_se_reading').$type<SeReading>(),
     glossEn: text('gloss_en'),
+    // AI-generated contextual gloss: meaning of this inflected form in this
+    // sentence (e.g. "of the house" not "house"). Generated at ingestion time
+    // by Claude Haiku; null for PUNCT, PROPN, and transparent CCONJ.
+    glossEnContext: text('gloss_en_context'),
     ambiguityAlternatives: jsonb('ambiguity_alternatives').$type<AmbiguityAlternative[]>(),
 
     // MWT grouping. UDPipe emits multi-word tokens like *într-un* as a

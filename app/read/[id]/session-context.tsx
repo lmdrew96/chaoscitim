@@ -1,14 +1,9 @@
 'use client';
 
-/**
- * Per-page session context. Reader instantiates the session manager
- * once and exposes a stable logEvent so deeply-nested token components
- * don't need it threaded through props.
- */
 import { createContext, useContext, type ReactNode } from 'react';
-import type { EventType } from '@/db/types';
+import type { EventType, SessionMode } from '@/db/types';
 
-type LogEvent = (event: {
+export type LogEvent = (event: {
   type: EventType;
   textId?: string | null;
   sentenceId?: number | null;
@@ -16,20 +11,35 @@ type LogEvent = (event: {
   payload?: Record<string, unknown> | null;
 }) => void;
 
-const noop: LogEvent = () => {};
+interface SessionCtx {
+  logEvent: LogEvent;
+  mode: SessionMode;
+  setMode: (mode: SessionMode) => void;
+}
 
-const Ctx = createContext<LogEvent>(noop);
+const noop: LogEvent = () => {};
+const noopSetMode = () => {};
+
+const Ctx = createContext<SessionCtx>({
+  logEvent: noop,
+  mode: 'active',
+  setMode: noopSetMode,
+});
 
 export function SessionContextProvider({
   value,
   children,
 }: {
-  value: LogEvent;
+  value: SessionCtx;
   children: ReactNode;
 }) {
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 
-export function useLogEvent(): LogEvent {
+export function useSessionContext(): SessionCtx {
   return useContext(Ctx);
+}
+
+export function useLogEvent(): LogEvent {
+  return useContext(Ctx).logEvent;
 }

@@ -5,6 +5,7 @@ import { parseConllu } from './conllu';
 import type { ParsedMwt, ParsedSentence, ParsedToken } from './conllu';
 import { classifyAllSe } from './se-rule';
 import { resolveGlosses, shouldGloss } from './glosses-resolve';
+import { generateContextGlosses, shouldContextGloss, MODEL_VERSION } from './gloss-context';
 import { getDb } from '../db';
 import {
   texts,
@@ -37,6 +38,8 @@ export interface IngestInput {
   offlineGlosses?: boolean;
   glossCachePath?: string;
   glossOverridesPath?: string;
+  /** Skip AI contextual gloss generation (for tests or offline mode). */
+  skipContextGlosses?: boolean;
 }
 
 export interface PreparedIngestion {
@@ -54,6 +57,8 @@ export interface PreparedIngestion {
     glossesFromOverride: number;
     glossesFromCache: number;
     glossesFromFetch: number;
+    contextGlossesGenerated: number;
+    contextGlossesMissing: number;
   };
 }
 
@@ -105,6 +110,15 @@ export async function prepareIngestion(
     overridesPath: input.glossOverridesPath,
   });
 
+  // AI contextual glosses — one Claude call per sentence, keyed by
+  // `${sentenceId}:${tokenPosition}`. Skip when explicitly disabled.
+  const contextGlossMap = input.skipContextGlosses
+    ? new Map<string, string | null>()
+    : await generateContextGlosses(sentences);
+
+  let contextGlossesGenerated = 0;
+  let contextGlossesMissing = 0;
+
   const tokenRows: NewTextToken[] = [];
   let wordCount = 0;
   let seClassifications = 0;
@@ -122,6 +136,15 @@ export async function prepareIngestion(
       const glossEn = shouldGloss(token.upos)
         ? glossResult.glosses.get(token.lemma) ?? null
         : null;
+      const glossEnContext = shouldContextGloss(token)
+        ? (contextGlossMap.get(`${sentence.sentenceId}:${token.id}`) ?? null)
+        : null;
+
+      if (shouldContextGloss(token)) {
+        if (glossEnContext !== null) contextGlossesGenerated++;
+        else contextGlossesMissing++;
+      }
+
       tokenRows.push({
         textId,
         sentenceId: sentence.sentenceId,
@@ -135,6 +158,7 @@ export async function prepareIngestion(
         deprel: token.deprel,
         enrichedSeReading: seReadings.get(token.id) ?? null,
         glossEn,
+        glossEnContext,
         ambiguityAlternatives: null,
         mwtId: mwt?.mwtId ?? null,
         mwtSurfaceForm: mwt?.mwtSurfaceForm ?? null,
@@ -163,6 +187,7 @@ export async function prepareIngestion(
     sentenceCount: sentences.length,
     ownerId: input.ownerId ?? null,
     visibility: input.visibility,
+    glossModelVersion: input.skipContextGlosses ? null : MODEL_VERSION,
   };
 
   return {
@@ -180,6 +205,8 @@ export async function prepareIngestion(
       glossesFromOverride: glossResult.diagnostics.fromOverride,
       glossesFromCache: glossResult.diagnostics.fromCache,
       glossesFromFetch: glossResult.diagnostics.fromFetch,
+      contextGlossesGenerated,
+      contextGlossesMissing,
     },
   };
 }

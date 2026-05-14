@@ -43,10 +43,15 @@ export type SessionEndReason =
   | 'idle_sweeper'    // server sweeper closed it after 30+ min of silence
   | 'tab_closed';     // (v1+) PWA detected tab close before idle timeout
 
-// Event types in interaction_events. Hover is intentionally not logged —
-// it's exploratory per the gloss spec.
+// Event types in interaction_events.
+// 'tap' is the legacy escalation event from the old tap-to-cycle UI — kept
+// for backward compatibility with existing rows. New UI emits the three
+// granular events below instead.
 export type EventType =
-  | 'tap'                 // escalation (tier_reached carries the new tier)
+  | 'tap'                 // (legacy) escalation: payload { tier_reached }
+  | 'hover'               // tier-1 tooltip shown (desktop only)
+  | 'card_open'           // gloss card opened — tier-2 visible
+  | 'tier3_expand'        // tier-3 AI gloss expanded within card
   | 'mode_change'         // payload: { from, to }
   | 'practice_guess'      // payload: { guess, correct_value, is_match }
   | 'ambiguity_override'; // (v1+) payload: { parser_pick, user_pick }
