@@ -179,7 +179,10 @@ export function formatTier1(upos: UPos, features: Features | null): string | nul
 // Labels are designed to read as noun phrases — "{label} *X*" where X is
 // the head — so the head never sounds like the subject of an action. E.g.
 // "object of *cere*" (clear) NOT "what acts on *cere*" (reads backwards).
-const DEPREL_LABELS: Record<string, string> = {
+// null = suppress the tier-2 pill entirely for this relation.
+// Use null when the label adds no information a learner can act on,
+// or when tier-1 already covers it (conjunctions, expletive pronouns).
+const DEPREL_LABELS: Record<string, string | null> = {
   root: 'main verb',
   nsubj: 'subject of',
   'nsubj:pass': 'passive subject of',
@@ -189,8 +192,8 @@ const DEPREL_LABELS: Record<string, string> = {
   'obl:agent': 'doer behind',
   vocative: 'addressee of',
   ccomp: 'clause completing',
-  xcomp: 'completer of',
-  expl: 'placeholder for',
+  xcomp: 'complement of',
+  expl: null,               // expletive — "placeholder for X" confuses learners
   'expl:pass': 'passive marker for',
   'expl:pv': 'reflexive "se" for',
   'expl:poss': 'possessive reflexive for',
@@ -205,17 +208,17 @@ const DEPREL_LABELS: Record<string, string> = {
   'aux:pass': 'passive helper for',
   cop: 'linking "to be" for',
   mark: 'introduces',
-  det: 'article/this/that for',
+  det: 'article for',
   case: 'preposition for',
-  cc: 'and/or word',
+  cc: null,                 // conjunction — tier-1 already says "conjunction"
   conj: 'joined to',
   appos: 'another name for',
-  fixed: 'part of',
-  flat: 'part of',
+  fixed: null,              // fixed expression — "part of X" tells learner nothing
+  flat: null,               // flat structure (names) — no useful label
   compound: 'compound with',
-  parataxis: 'side-by-side with',
-  punct: 'punctuation',
-  dep: 'connected to',
+  parataxis: null,          // parenthetical aside — no concise learner-friendly label
+  punct: null,              // punctuation — never useful
+  dep: null,                // unspecified — no concise label
 };
 
 /**
@@ -226,11 +229,12 @@ const DEPREL_LABELS: Record<string, string> = {
  * lemma when the head is a verb (so it reads naturally with "of"), and
  * the surface form otherwise. The caller decides — we just render.
  */
-export function formatTier2(deprel: string, headSurface: string | null): string {
-  const label = DEPREL_LABELS[deprel] ?? deprel;
-  if (deprel === 'root' || deprel === 'punct' || deprel === 'cc') return label;
+export function formatTier2(deprel: string, headSurface: string | null): string | null {
+  const entry = DEPREL_LABELS[deprel];
+  const label: string | null = entry === undefined ? deprel : entry;
+  if (label === null) return null;
+  if (deprel === 'root') return label; // no head needed for root
   if (!headSurface) return label;
-  // Italicize the head word using markdown-ish *…*; Reader can choose to
-  // render that. Otherwise read fine inline.
+  // Italicize the head word using *…*; the Reader renders it as <em>.
   return `${label} *${headSurface}*`;
 }

@@ -130,7 +130,7 @@ export function TokenWord({
               {tier1Label}
             </span>
           ) : null}
-          {tier >= 2 ? (
+          {tier >= 2 && tier2Label !== null ? (
             <span
               className={`rounded px-1.5 py-0.5 font-mono text-[0.7rem] ${PILL_COLORS[2]}`}
             >
