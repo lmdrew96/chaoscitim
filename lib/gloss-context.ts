@@ -19,12 +19,24 @@ export const MODEL_VERSION = 'claude-haiku-4-5-20251001';
 // but-not → ci). Contextual AI gloss adds no value for these.
 const SKIP_CCONJ_LEMMAS = new Set(['și', 'dar', 'sau', 'ori', 'ci']);
 
+// PART lemmas that are pure grammatical markers. Tier-1 already labels them;
+// repeating a gloss every occurrence is noise for a learner trying to build
+// recognition rather than relying on translation.
+const SKIP_PART_LEMMAS = new Set(['să', 'nu', 's-']);
+
 /** Returns true when a token should receive a contextual AI gloss. */
 export function shouldContextGloss(token: ParsedToken): boolean {
   const { upos, lemma } = token;
   if (upos === 'PUNCT' || upos === 'SYM' || upos === 'X') return false;
   if (upos === 'PROPN') return false;
   if (upos === 'CCONJ' && SKIP_CCONJ_LEMMAS.has(lemma)) return false;
+  // Auxiliary verbs: the main verb already carries the semantic content.
+  if (upos === 'AUX') return false;
+  // Reflexive pronouns (se, s-, și-) are grammatical clitics, not content words.
+  if (upos === 'PRON' && token.feats.Reflex === 'Yes') return false;
+  // High-frequency grammatical particles — learner should internalize these,
+  // not read a repeated gloss every time they appear.
+  if (upos === 'PART' && SKIP_PART_LEMMAS.has(lemma)) return false;
   return true;
 }
 
@@ -46,15 +58,18 @@ function describeToken(token: ParsedToken): string {
 
 const SYSTEM_PROMPT = `You are a Romanian-to-English language assistant helping learners read Romanian text.
 
-For each token in the sentence, produce a short English contextual gloss (3–8 words) that captures the meaning of the inflected form as used IN THIS SPECIFIC SENTENCE — not the bare dictionary definition.
+For each token, produce a SHORT English gloss (1–5 words) capturing the meaning of that single inflected form as used in this specific sentence.
 
 Rules:
-- Reflect case meaning for nouns/pronouns (e.g. "of the house", "to her", "for them")
-- Reflect person + tense for verbs (e.g. "they were going", "I had given", "she would know")
-- Reflect grammatical function for particles and subordinators (e.g. "in order to [subjunctive]", "that [complement]")
-- 3–8 words maximum — omit unnecessary articles when unnatural
-- Do not repeat the Romanian word in the gloss
-- Do not add grammatical labels in parentheses — just natural English`;
+- Gloss each token independently. Do not absorb meaning from adjacent words.
+- Nouns/pronouns: reflect case naturally — "of the house", "to her", "the teacher"
+- Verbs: reflect person and tense — "they were going", "she would know", "I gave"
+- Prepositions: give the natural English equivalent for this context — "in", "of", "from", "during"
+- Subordinators: "that", "in order to", "when", "because" — bare conjunction only
+- 1–5 words maximum. Prefer 1–3 words. Shorter is always better.
+- NEVER use parentheses or brackets. No labels of any kind — no "(auxiliary)", "(reflexive)", "(subjunctive marker)", nothing.
+- Output only natural English. No metalanguage, no grammatical commentary.
+- Do not repeat the Romanian word in the gloss.`;
 
 interface GlossEntry {
   position: number;

@@ -28,6 +28,12 @@ export function TokenWord({ token, head, mwe = null }: TokenWordProps) {
 
   const tier1Label = formatTier1(token.upos, token.features ?? null);
 
+  // Truncate at first comma — gloss fields often list alternatives ("were living, used to live in")
+  // and the first is the most direct. Keeps inline columns narrow and scannable.
+  const shortGloss = token.glossEnContext
+    ? (token.glossEnContext.split(',')[0]?.trim() ?? token.glossEnContext)
+    : null;
+
   const handleMouseEnter = useCallback(() => {
     if (!tier1Label) return;
     hoverTimerRef.current = setTimeout(() => {
@@ -98,7 +104,7 @@ export function TokenWord({ token, head, mwe = null }: TokenWordProps) {
   const showTooltip = tooltipVisible && !isActive && tier1Label;
 
   return (
-    <span className="relative inline-block">
+    <span className={mode === 'show_all' ? 'relative inline-flex flex-col items-center align-top px-1' : 'relative inline-block'}>
       <button
         type="button"
         data-token-button
@@ -132,13 +138,13 @@ export function TokenWord({ token, head, mwe = null }: TokenWordProps) {
         </span>
       ) : null}
 
-      {/* Inline gloss — show_all mode */}
-      {mode === 'show_all' && token.glossEnContext ? (
+      {/* Inline gloss — show_all mode, in-flow so it adds to line height */}
+      {mode === 'show_all' && shortGloss ? (
         <span
-          className="absolute left-1/2 top-full z-10 -translate-x-1/2 whitespace-nowrap font-mono text-[0.6rem] text-tier-3 opacity-75"
+          className="whitespace-nowrap font-mono text-[0.6rem] text-tier-3 opacity-75"
           aria-hidden="true"
         >
-          {token.glossEnContext}
+          {shortGloss}
         </span>
       ) : null}
     </span>

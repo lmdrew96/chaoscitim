@@ -46,7 +46,7 @@ export function Reader({ payload }: { payload: ReadingPayload }) {
         </div>
 
         <article
-          className={`reading-prose mt-4 ${mode === 'show_all' ? 'leading-loose' : ''}`}
+          className="reading-prose mt-4"
         >
           {payload.sentences.map((sentence) => (
             <SentenceP

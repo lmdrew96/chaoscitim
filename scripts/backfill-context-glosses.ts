@@ -115,6 +115,47 @@ async function main(): Promise<void> {
       mwts: [],
     }));
 
+    // In --force mode, clear glosses from tokens now excluded by shouldContextGloss
+    // (e.g. AUX, reflexive pronouns, "să") so stale verbose glosses don't linger.
+    if (args.force && !args['dry-run']) {
+      const allTokenIds = tokenRows.map((t) => t.tokenPosition);
+      const eligibleIds = new Set(
+        tokenRows
+          .filter((t) =>
+            shouldContextGloss({
+              id: t.tokenPosition,
+              form: t.surfaceForm,
+              lemma: t.lemma,
+              upos: t.upos as ParsedToken['upos'],
+              xpos: t.xpos ?? null,
+              feats: (t.features as ParsedToken['feats']) ?? {},
+              head: t.headPosition ?? null,
+              deprel: t.deprel,
+              deps: null,
+              misc: {},
+            }),
+          )
+          .map((t) => t.tokenPosition),
+      );
+      const excludedIds = allTokenIds.filter((id) => !eligibleIds.has(id));
+      if (excludedIds.length > 0) {
+        // Batch clear in chunks to avoid query size limits.
+        for (let i = 0; i < excludedIds.length; i += 200) {
+          const chunk = excludedIds.slice(i, i + 200);
+          await db
+            .update(textTokens)
+            .set({ glossEnContext: null })
+            .where(
+              and(
+                eq(textTokens.textId, text.id),
+                inArray(textTokens.tokenPosition, chunk),
+              ),
+            );
+        }
+        console.log(`    cleared ${excludedIds.length} excluded-token glosses`);
+      }
+    }
+
     let textGenerated = 0;
     let textMissing = 0;
 
