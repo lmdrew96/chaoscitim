@@ -13,7 +13,7 @@
  * caches on the next service-worker activation.
  */
 
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const PRECACHE = `chaoscitim-precache-${CACHE_VERSION}`;
 const PAGES_CACHE = `chaoscitim-pages-${CACHE_VERSION}`;
 const STATIC_CACHE = `chaoscitim-static-${CACHE_VERSION}`;
@@ -91,17 +91,33 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(networkFirst(request, PAGES_CACHE));
 });
 
+function isCacheableNavigation(url) {
+  // /read/* pages require authentication and may contain private BYO texts.
+  // Never cache them — a stale cache entry could expose private content after
+  // sign-out or an account switch on a shared device.
+  // Public offline support for seed texts is a future patch (needs per-user
+  // cache partitioning and an explicit server-side opt-in header).
+  if (url.pathname.startsWith('/read/')) return false;
+  // Auth routes carry Clerk session cookies — network only.
+  if (url.pathname.startsWith('/sign-in') || url.pathname.startsWith('/sign-up')) return false;
+  return true;
+}
+
 async function navigationStrategy(request) {
+  const url = new URL(request.url);
+  const cacheable = isCacheableNavigation(url);
   const cache = await caches.open(PAGES_CACHE);
   try {
     const fresh = await fetch(request);
-    if (fresh && fresh.ok) {
+    if (fresh && fresh.ok && cacheable) {
       cache.put(request, fresh.clone()).catch(() => {});
     }
     return fresh;
   } catch {
-    const cached = await cache.match(request);
-    if (cached) return cached;
+    if (cacheable) {
+      const cached = await cache.match(request);
+      if (cached) return cached;
+    }
     const offline = await caches.match('/offline');
     if (offline) return offline;
     return new Response('You are offline.', {
