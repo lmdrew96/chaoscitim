@@ -13,6 +13,7 @@ import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 import { getDb } from '@/db';
 import { readingSessions } from '@/db/schema';
+import { materializeEncounters } from '@/lib/encounters';
 
 const Body = z.object({
   endReason: z.enum(['explicit', 'idle_sweeper', 'tab_closed']),
@@ -61,6 +62,15 @@ export async function POST(
     .update(readingSessions)
     .set({ endedAt, endReason: parsed.data.endReason })
     .where(eq(readingSessions.id, sessionId));
+
+  // Materialize token_encounters inline. A failure here is logged but does
+  // not fail the /end response — the session is closed regardless.
+  // encountersMaterialized=false on the session row makes this retry-safe.
+  try {
+    await materializeEncounters(sessionId);
+  } catch (err) {
+    console.error('[materializer] failed for session', sessionId, err);
+  }
 
   return NextResponse.json(
     { endedAt: endedAt.toISOString(), endReason: parsed.data.endReason },

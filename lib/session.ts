@@ -108,6 +108,13 @@ export function useReadingSession({ textId, initialMode }: StartArgs) {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ events: batch }),
       });
+      if (res.status === 409) {
+        // Session was closed server-side (idle sweeper or prior tab close).
+        // Clear refs so the next tap lazily opens a fresh session.
+        sessionIdRef.current = null;
+        endedRef.current = false;
+        return;
+      }
       if (!res.ok) {
         console.warn('[session] flush failed', res.status, await res.text());
       }
@@ -139,46 +146,53 @@ export function useReadingSession({ textId, initialMode }: StartArgs) {
     [ensureSession, isSignedIn, scheduleFlush],
   );
 
-  // Flush + end on tab hide. sendBeacon for the /end call so it survives
-  // the page going away.
+  // Flush pending events via sendBeacon (fire-and-forget, survives page unload).
+  const beaconFlush = useCallback(() => {
+    const sessionId = sessionIdRef.current;
+    if (!sessionId || queueRef.current.length === 0) return;
+    const body = JSON.stringify({ events: queueRef.current });
+    navigator.sendBeacon(
+      `/api/sessions/${sessionId}/events`,
+      new Blob([body], { type: 'application/json' }),
+    );
+    queueRef.current = [];
+  }, []);
+
   useEffect(() => {
     if (!isSignedIn) return;
 
-    const onHide = () => {
-      // Force-flush any pending events synchronously via sendBeacon.
+    // visibilitychange → hidden: tab switch, phone lock, app background.
+    // Flush only — the session stays open so taps after the user returns
+    // are still accepted.
+    const onVisibilityHidden = () => {
+      if (document.visibilityState === 'hidden') beaconFlush();
+    };
+
+    // pagehide: true navigation away / tab close / process termination.
+    // Flush + end.
+    const onPageHide = () => {
+      beaconFlush();
       const sessionId = sessionIdRef.current;
-      if (sessionId && queueRef.current.length > 0) {
-        const body = JSON.stringify({ events: queueRef.current });
-        navigator.sendBeacon(
-          `/api/sessions/${sessionId}/events`,
-          new Blob([body], { type: 'application/json' }),
-        );
-        queueRef.current = [];
-      }
       if (sessionId && !endedRef.current) {
         endedRef.current = true;
-        const endBody = JSON.stringify({
-          endReason: 'tab_closed',
-          endedAt: new Date().toISOString(),
-        });
+        sessionIdRef.current = null;
         navigator.sendBeacon(
           `/api/sessions/${sessionId}/end`,
-          new Blob([endBody], { type: 'application/json' }),
+          new Blob(
+            [JSON.stringify({ endReason: 'tab_closed', endedAt: new Date().toISOString() })],
+            { type: 'application/json' },
+          ),
         );
       }
     };
 
-    const onVisibility = () => {
-      if (document.visibilityState === 'hidden') onHide();
-    };
-
-    window.addEventListener('pagehide', onHide);
-    document.addEventListener('visibilitychange', onVisibility);
+    document.addEventListener('visibilitychange', onVisibilityHidden);
+    window.addEventListener('pagehide', onPageHide);
     return () => {
-      window.removeEventListener('pagehide', onHide);
-      document.removeEventListener('visibilitychange', onVisibility);
+      document.removeEventListener('visibilitychange', onVisibilityHidden);
+      window.removeEventListener('pagehide', onPageHide);
     };
-  }, [isSignedIn]);
+  }, [isSignedIn, beaconFlush]);
 
   return { logEvent };
 }
