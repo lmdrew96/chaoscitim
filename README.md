@@ -33,20 +33,23 @@ Each word is its own tappable button. Click cycles through tiers; hover (desktop
 
 ### What's shipped
 
-- **Ingestion pipeline** — URL or paste → diacritic restoration → UDPipe morphology → Wiktionary glosses → DB (`scripts/ingest.ts`)
+- **Ingestion pipeline** — URL, file paste, PDF, or EPUB → diacritic restoration → UDPipe morphology → Wiktionary glosses → DB (`scripts/ingest.ts`, `app/api/texts/`)
 - **Diacritic restorer** — Unicode normalization (legacy cedilla → comma-below) + curated substitution map for informal text drops (`lib/diacritic.ts`)
 - **Tier-3 English gloss source** — batched MediaWiki API against en.wiktionary, parses Romanian POS sections, caches results to disk (`lib/wiktionary.ts`, CC BY-SA 4.0)
 - **MWE / idiom glossing** — render-time longest-first lemma-sequence matching against `data/mwes.json`; ships with ~35 high-frequency entries (`lib/mwe.ts`)
 - **Reader UI** — per-token tier escalation, MWE spans, plain-English labels, hover-peek overlays, right-click jump-to-gloss
-- **PWA** — generated manifest + icons, hand-written service worker (network-first navigations, stale-while-revalidate static assets), offline fallback page
+- **Reading sessions** — lazy client-side session creation on first tap; tap events logged with per-session batched flush; visibilitychange flushes only, pagehide ends the session
+- **Comprehension event pipeline** — `interaction_events` append-only log; `token_encounters` materialized on session end with tier-0/re-read/show_all rules applied
+- **PWA** — generated manifest + icons, hand-written service worker (network-first navigations, stale-while-revalidate static assets, private /read/* pages excluded from cache), offline fallback page
+- **SSRF-hardened URL import** — private IPs, loopback, link-local, AWS IMDS, and metadata endpoints blocked; redirects followed manually with per-hop validation
 
 ### What's deferred
 
 - **Dexonline tier-3 paradigm view** — full inflectional table + etymology behind tier 3 (v1+ patch)
 - **Homography table** — surface form ambiguity disclosure at tier 1 (v1+ patch)
 - **Error Garden integration** — opt-in "guess the case" interaction that logs wrong guesses as reception-side errors, shared with ChaosLimbă
-- **BYO ingestion formats** — EPUB import, clipboard watcher
-- **Comprehension-event sync queue** — currently no client-side events are logged; will land alongside the comprehension curve patch
+- **Clipboard watcher** — continuous paste ingestion (v1+)
+- **Comprehension curve UI** — tier-0 rate chart over time; idle-sweeper cron to close sessions after 30 min of inactivity (follow-on patch)
 
 ---
 
