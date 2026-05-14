@@ -1,35 +1,70 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────
- * Theme — ADHDesigns palette, ChaosCitim slice
+ * ADHDesigns brand tokens — ChaosCitim slice
  *
- * Olive       #849440  →  used for success / tier-0 affordances
- * Deep Teal   #244952  →  primary surface accent
- * Amber       #DFA649  →  tier-1 morphology highlight
- * Mauve       #88739E  →  tier-2 role highlight
- * Sage Teal   #8CBDB9  →  tier-3 gloss highlight
- * Off White   #F7F5FA  →  reading surface
- * Deep Dark   #1E1830  →  ink
+ * Teal Deep   #244952  →  primary accent / section headings
+ * Gold        #DFA649  →  tier-1 morphology + primary CTA
+ * Purple      #88739E  →  tier-2 role highlight
+ * Mint        #8CBDB9  →  tier-3 gloss highlight / calm
+ * Olive       #849440  →  tier-0 / success affordances
+ * Green       #97D181  →  active / live states
+ * Lavender    #DBD5E2  →  borders, soft dividers
+ * Surface     #F7F5FA  →  page canvas / reading surface
+ * Ink         #1E1830  →  primary text
  * ───────────────────────────────────────────────────────────── */
+
+/* Raw brand values — no --color- prefix to avoid collision with @theme inline */
 :root {
-  --background: #F7F5FA;
-  --foreground: #1E1830;
-  --tier-1: #DFA649;
-  --tier-2: #88739E;
-  --tier-3: #8CBDB9;
-  --accent: #244952;
+  --gold:     #DFA649;
+  --olive:    #849440;
+  --teal:     #244952;
+  --purple:   #88739E;
+  --mint:     #8CBDB9;
+  --green:    #97D181;
+  --lavender: #DBD5E2;
+  --surface:  #F7F5FA;
+  --ink:      #1E1830;
+  --white:    #FFFFFF;
+
+  /* Semantic aliases (these ARE used as CSS vars in component styles) */
+  --background: var(--surface);
+  --foreground: var(--ink);
+  --accent:     var(--teal);
+  --tier-1:     var(--gold);
+  --tier-2:     var(--purple);
+  --tier-3:     var(--mint);
+
+  /* Radius + shadow — used directly in component inline styles */
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-pill: 9999px;
+  --shadow-card: 0px 1px 1.5px rgba(0, 0, 0, 0.10), 0px 1px 1px rgba(0, 0, 0, 0.10);
 }
 
+/* @theme inline: maps Tailwind utility names to CSS var references.
+   Values reference :root vars (no --color- prefix there) to avoid circular refs.
+   Fonts reference Next.js-injected CSS vars (--font-*) on <html>. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-tier-1: var(--tier-1);
-  --color-tier-2: var(--tier-2);
-  --color-tier-3: var(--tier-3);
-  --color-accent: var(--accent);
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Georgia",
-    "Times New Roman", serif;
+  --color-accent:     var(--accent);
+  --color-tier-1:     var(--tier-1);
+  --color-tier-2:     var(--tier-2);
+  --color-tier-3:     var(--tier-3);
+  --color-gold:       var(--gold);
+  --color-olive:      var(--olive);
+  --color-purple:     var(--purple);
+  --color-mint:       var(--mint);
+  --color-green:      var(--green);
+  --color-lavender:   var(--lavender);
+  --color-surface:    var(--surface);
+  --color-ink:        var(--ink);
+  --color-white:      var(--white);
+  --font-sans:        var(--font-space-grotesk, 'Space Grotesk', system-ui, sans-serif);
+  --font-serif:       var(--font-fraunces, 'Fraunces', Georgia, serif);
+  --font-mono:        var(--font-geist-mono, 'Geist Mono', 'Fira Code', monospace);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,16 +78,23 @@ html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans);
-  /* Generous line-height: ND-spec calls for 1.5+ for body, 1.7+ for reading. */
+  /* Reference the Next.js CSS var directly — @theme inline doesn't emit --font-sans */
+  font-family: var(--font-space-grotesk, 'Space Grotesk', system-ui, sans-serif);
   line-height: 1.6;
 }
 
-/* Reading surface: serif, slightly larger, looser leading. */
+/* Fraunces for all headings — same reason: reference Next.js var directly */
+h1, h2, h3, h4 {
+  font-family: var(--font-fraunces, 'Fraunces', Georgia, serif);
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
+}
+
+/* Reading surface: Fraunces is a reading-optimized literary serif — fits Romanian texts */
 .reading-prose {
-  font-family: var(--font-serif);
+  font-family: var(--font-fraunces, 'Fraunces', Georgia, serif);
   font-size: 1.15rem;
   line-height: 1.85;
+  font-variation-settings: 'SOFT' 0, 'WONK' 1;
 }
 
 /* Respect reduced-motion. Per nd-design spec. */

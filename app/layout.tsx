@@ -1,7 +1,26 @@
 import type { Metadata, Viewport } from 'next';
+import { Fraunces, Space_Grotesk, Geist_Mono } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import './globals.css';
 import { SwRegister } from './sw-register';
+
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  axes: ['SOFT', 'WONK'],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  weight: ['400', '500', '600'],
+});
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+  weight: ['400'],
+});
 
 export const metadata: Metadata = {
   title: 'ChaosCitim',
@@ -27,7 +46,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className={`${fraunces.variable} ${spaceGrotesk.variable} ${geistMono.variable}`}>
         <body>
           {children}
           <SwRegister />

@@ -122,11 +122,11 @@ export function GlossCard() {
     <div
       ref={cardRef}
       data-gloss-card
-      style={cardStyle}
-      className={`z-50 shadow-xl ring-1 ring-foreground/10 ${
+      style={{ ...cardStyle, boxShadow: 'var(--shadow-card), 0 8px 24px rgba(0,0,0,0.12)' }}
+      className={`z-50 ring-1 ring-foreground/10 ${
         isMobile
-          ? 'rounded-t-2xl bg-background px-4 pb-6 pt-4'
-          : 'rounded-xl bg-background px-4 py-4'
+          ? 'rounded-t-3xl bg-background px-4 pb-6 pt-4'
+          : 'rounded-3xl bg-background px-4 py-4'
       }`}
     >
       {/* Header row */}

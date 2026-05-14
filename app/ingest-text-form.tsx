@@ -231,7 +231,7 @@ export function IngestTextForm() {
       <div
         role="tablist"
         aria-label="Ingestion mode"
-        className="mb-5 inline-flex rounded-md border border-foreground/15 p-1 text-sm"
+        className="mb-5 inline-flex rounded-full border border-foreground/15 p-1 text-sm"
       >
         {(['paste', 'url', 'pdf', 'epub'] as const).map((m) => (
           <button
@@ -240,7 +240,7 @@ export function IngestTextForm() {
             role="tab"
             aria-selected={mode === m}
             onClick={() => setMode(m)}
-            className={`inline-flex items-center gap-1.5 rounded px-3 py-1.5 transition ${
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 transition ${
               mode === m
                 ? 'bg-accent text-white'
                 : 'opacity-70 hover:opacity-100'
@@ -359,7 +359,7 @@ export function IngestTextForm() {
             <button
               type="button"
               onClick={onPasteFromClipboard}
-              className="inline-flex items-center gap-1.5 rounded-md border border-foreground/20 px-2.5 py-1.5 text-xs transition hover:border-accent hover:text-accent"
+              className="inline-flex items-center gap-1.5 rounded-full border border-foreground/20 px-2.5 py-1.5 text-xs transition hover:border-accent hover:text-accent"
             >
               <ClipboardPaste className="h-3.5 w-3.5" aria-hidden="true" />
               Paste from clipboard
@@ -426,7 +426,7 @@ export function IngestTextForm() {
         <button
           type="submit"
           disabled={state.status === 'submitting'}
-          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-medium text-ink transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {state.status === 'submitting' ? (
             <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
