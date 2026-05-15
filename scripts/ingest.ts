@@ -104,6 +104,7 @@ const SourceTypeEnum = z.enum([
   'byo_paste',
   'byo_epub',
   'byo_clipboard',
+  'ai_generated',
 ]);
 const VisibilityEnum = z.enum(['public_seed', 'private', 'cohort_shared']);
 

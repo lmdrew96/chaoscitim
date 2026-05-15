@@ -11,7 +11,8 @@ export type SourceType =
   | 'byo_paste'
   | 'byo_pdf'
   | 'byo_epub'
-  | 'byo_clipboard';
+  | 'byo_clipboard'
+  | 'ai_generated';
 
 export type License =
   | 'cc_by'
