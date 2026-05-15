@@ -41,6 +41,38 @@
     { "lemmas": ["cu", "toate", "că"], "gloss": "although", "register": "neutral", "notes": "subordinating conjunction phrase" },
     { "lemmas": ["în", "loc", "de"], "gloss": "instead of", "register": "neutral" },
     { "lemmas": ["în", "loc", "să"], "gloss": "instead of (doing)", "register": "neutral", "notes": "followed by subjunctive verb" },
-    { "lemmas": ["după", "cum"], "gloss": "just as", "register": "neutral" }
+    { "lemmas": ["după", "cum"], "gloss": "just as", "register": "neutral" },
+
+    { "lemmas": ["cu", "atât", "mai", "mult", "cu", "cât"], "gloss": "all the more because", "register": "neutral", "notes": "full correlative: cu atât mai mult cu cât — 'the more...the more'" },
+    { "lemmas": ["cu", "atât", "mai", "mult"], "gloss": "all the more", "register": "neutral", "notes": "standalone form; full correlative has cu cât extension" },
+    { "lemmas": ["cu", "alt", "cuvânt"], "gloss": "in other words", "register": "neutral", "notes": "lit. 'with other words'; cuvinte lemmatizes to cuvânt" },
+    { "lemmas": ["cu", "tot", "acesta"], "gloss": "nevertheless", "register": "neutral", "notes": "cu toate acestea — lit. 'with all these'" },
+    { "lemmas": ["în", "consecință"], "gloss": "consequently", "register": "neutral" },
+    { "lemmas": ["mai", "devreme", "sau", "mai", "târziu"], "gloss": "sooner or later", "register": "neutral" },
+    { "lemmas": ["de", "obicei"], "gloss": "usually", "register": "neutral" },
+    { "lemmas": ["în", "sfârșit"], "gloss": "finally", "register": "neutral" },
+    { "lemmas": ["din", "nou"], "gloss": "again", "register": "neutral" },
+    { "lemmas": ["în", "special"], "gloss": "especially", "register": "neutral" },
+    { "lemmas": ["la", "fel", "de"], "gloss": "just as", "register": "neutral", "notes": "equative comparator before adjective: la fel de important = just as important" },
+
+    { "lemmas": ["față", "de"], "gloss": "compared to", "register": "neutral", "notes": "also: vis-à-vis, in relation to" },
+    { "lemmas": ["în", "ciudă"], "gloss": "despite", "register": "neutral", "notes": "ciuda → ciudă; always followed by genitive noun" },
+    { "lemmas": ["în", "cadru"], "gloss": "within", "register": "neutral", "notes": "în cadrul — surface always definite (cadrul), lemma is cadru; 'within the framework of'" },
+    { "lemmas": ["cu", "privire", "la"], "gloss": "regarding", "register": "neutral" },
+    { "lemmas": ["în", "afară", "de"], "gloss": "besides", "register": "neutral", "notes": "also: except for" },
+    { "lemmas": ["în", "urmă"], "gloss": "following", "register": "neutral", "notes": "în urma [gen] = following/after an event; same lemma also appears in 'cu o oră în urmă' (an hour ago)" },
+    { "lemmas": ["din", "punct", "de", "vedere"], "gloss": "from the point of view of", "register": "neutral" },
+    { "lemmas": ["pe", "parcurs"], "gloss": "throughout", "register": "neutral", "notes": "pe parcursul — surface definite (parcursul), lemma is parcurs" },
+    { "lemmas": ["cel", "puțin"], "gloss": "at least", "register": "neutral" },
+    { "lemmas": ["cel", "mult"], "gloss": "at most", "register": "neutral" },
+
+    { "lemmas": ["face", "față"], "gloss": "to cope with", "notes": "lit. 'to make face'; a face față — always followed by dative" },
+    { "lemmas": ["ține", "cont"], "gloss": "to take into account", "notes": "a ține cont de; lit. 'to hold account'" },
+    { "lemmas": ["face", "parte"], "gloss": "to be a part of", "notes": "a face parte din; lit. 'to make part'" },
+    { "lemmas": ["aduce", "aminte"], "gloss": "to recall", "notes": "a-și aduce aminte / a aduce aminte de; lit. 'to bring to mind'" },
+    { "lemmas": ["da", "dovadă"], "gloss": "to demonstrate", "notes": "a da dovadă de; lit. 'to give proof'" },
+    { "lemmas": ["pune", "accent"], "gloss": "to emphasize", "notes": "a pune accent pe; lit. 'to put accent'" },
+    { "lemmas": ["lua", "în", "considerare"], "gloss": "to take into consideration", "notes": "a lua în considerare" },
+    { "lemmas": ["lua", "în", "seamă"], "gloss": "to take into account", "notes": "a lua în seamă; contrast with a băga în seamă (to acknowledge)" }
   ]
 }

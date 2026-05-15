@@ -257,6 +257,154 @@ const seedTexts: Array<IngestInput> = [
     model: undefined,
     offlineGlosses: false,
   },
+  // targetConstructions: []
+  {
+    title: 'La școală',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Azi este luni. Elena merge la școală. Clasa este mare. Elevii stau la bănci. Profesorul scrie pe tablă. Elena ascultă cu atenție. La ora de matematică fac exerciții. Ionel uită caietul acasă. Profesoara îl ceartă puțin. El promite că nu mai uită. La pauză copiii ies afară. Se joacă și mănâncă sandvișuri. La prânz toți merg acasă. Mama întreabă cum a fost ziua. Elena zice că a fost bine. Are teme de română și de desen. Le face repede și se uită la televizor.`,
+    cefrLevel: 'A1',
+    topicTags: ['education', 'school'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  // targetConstructions: ['subjunctive_obligation']
+  {
+    title: 'Sfaturi pentru o viață sănătoasă',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Un stil de viață sănătos nu este complicat, dar presupune câteva alegeri zilnice conștiente. Mai întâi, trebuie să dormi cel puțin șapte ore pe noapte. Somnul insuficient îți afectează concentrarea și starea de spirit pe tot parcursul zilei. De asemenea, trebuie să bei suficientă apă — cel puțin doi litri pe zi, mai mult dacă faci sport sau dacă este cald afară.
+
+Alimentația joacă un rol esențial. Trebuie să mănânci fructe și legume zilnic, nu doar ocazional. Evită pe cât posibil mâncărurile prăjite și dulciurile în cantități mari, dar nu trebuie să renunți complet la ele — moderația este cheia. Gătitul acasă este în general mai sănătos decât mâncatul la restaurant, chiar dacă necesită mai mult timp.
+
+Mișcarea este la fel de importantă ca dieta. Nu trebuie să te înscrii la sală dacă nu îți place; o plimbare de treizeci de minute pe zi este suficientă pentru a menține corpul activ. Trebuie să alegi activitatea care ți se potrivește: dans, înot, ciclism sau pur și simplu o plimbare prin parc.
+
+În fine, trebuie să îți acorzi timp și pentru relaxare. Stresul prelungit slăbește sistemul imunitar și dăunează sănătății mentale. Cititul, meditația sau petrecerea timpului cu prietenii sunt la fel de importante ca dieta și exercițiile fizice. Sănătatea nu este un proiect de weekend — este o practică zilnică.`,
+    cefrLevel: 'B1',
+    topicTags: ['health', 'advice'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  // targetConstructions: ['clitic_doubling']
+  {
+    title: 'Prietenia la distanță',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Pe Roxana o cunoscusem la facultate, în primul an de licență. Ne-am împrietenit repede, pentru că amândouă iubeam literatura și cafeaua tare de dimineață. Stăteam ore întregi la biblioteca facultății, deși rareori citeam ceva din bibliografia obligatorie.
+
+După absolvire, ea s-a mutat la Viena pentru un masterat în istoria artei, iar eu am rămas în Cluj cu un loc de muncă la o agenție de comunicare. La început, distanța nu a contat — o sunam în fiecare seară. Îi povesteam tot ce se întâmpla la birou; ea îmi descria orașul nou, muzeele și colegii de apartament, cu care nu se înțelegea întotdeauna bine.
+
+Lunile au trecut și apelurile s-au rărit. Nu din răceală, ci din oboseala acumulată a vieților paralele. Pe Roxana o apuca munca de dimineață până seara, iar pe mine — proiectele fără sfârșit. Mesajele scurte au înlocuit treptat conversațiile lungi, și până la urmă nici mesajele nu mai veneau zilnic.
+
+Vara trecută, am vizitat-o la Viena pentru prima dată de la plecarea ei. Roxana o recunoșteam din mers, chiar și în mulțimea de pe aeroport: aceeași postură dreaptă, aceeași geantă galbenă pe care o luase de la piața Unirii. Ne-am îmbrățișat lung, fără să spunem nimic. Apartamentul ei era mic, dar plin de cărți și de lumină de după-amiază. Micul dejun îl luam la o cofetărie din colț; cafeaua o beam în tăcere, uitându-ne la oamenii care treceau.
+
+Acele trei zile le-am trăit intens, ca și cum nici nu trecuseră cei doi ani de distanță. Pe treptele unui muzeu, i-am povestit despre un bărbat pe care îl întâlnisem câteva luni înainte — pe el l-am descris în detaliu, și ea a ascultat cu răbdarea de care numai prietenii vechi sunt capabili. Înainte să plec, m-a întrebat dacă regret că am rămas în România. I-am răspuns sincer: câteodată da, câteodată nu.
+
+O prietenă ca Roxana te învață că prietenia adevărată rezistă distanței — nu neschimbată, ci transformată. Iar transformarea asta, dacă o accepți, devine ea însăși dovada că relația are rădăcini mai adânci decât proximitatea.`,
+    cefrLevel: 'B2',
+    topicTags: ['friendship', 'relationships'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  // targetConstructions: ['pluperfect', 'subjunctive_after_conjunction']
+  {
+    title: 'Despre cum am (re)învățat să citesc',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Înainte să înțeleg ce înseamnă cu adevărat a citi, trecuseră ani în care răsfoiam cărți fără să le las să mă atingă. Citeam cuvintele cu o distanță calculată, fără să permit semnificației să mă deranjeze — un fel de carantină voluntară față de emoție. Descoperisem această tehnică pe la adolescență, când lecturile de la școală mă puseseră față în față cu durerea altora fără nicio pregătire prealabilă.
+
+Mecanismul funcționa simplu: priveam pagina, înregistram informația, continuam. Înțelesesem că lectura poate rămâne, dacă vrei, un act pur tehnic — o decodificare de semne fără rezonanță afectivă. Nu că mi-aș fi propus explicit aceasta; mai curând era o strategie pe care o adoptasem fără să o conștientizez, înainte să am vocabularul necesar pentru a o descrie.
+
+La douăzeci și cinci de ani, am dat peste un roman pe care nu știusem să-l evit la timp. Nu mai rețin titlul exact, dar rețin că îl citeam în tren, cu câteva stații înainte să ajungem la destinație, și că la un moment dat mi-am dat seama că plâng — fără să fi hotărât, fără să fi anticipat. Nu un plâns ornamental, controlabil, ci ceva mai intim, care ieșise fără să mă consulte.
+
+Ajunsesem, fără să planific, la o formă de lectură în care textul și cititorul negociază cu forțe egale. Cartea nu mai distra; lucra. Înțelesesem asta în mod teoretic cu mult înainte să o trăiesc, dar cunoașterea livrescă nu pregătise nimeni pentru contactul efectiv. Profesorii de liceu spuseseră mereu că un roman bun te schimbă — o formulă repetată de atâtea ori încât devenise zgomot de fundal.
+
+De atunci, citesc altfel. Nu mai citesc ca să termin, nici ca să bifez. Mă trezesc uneori noaptea, fără un motiv pe care să-l pot articula, atras înapoi de un pasaj care nu m-a lăsat să adorm liniștit. Cărțile pe care le-am citit astfel nu mi-au adăugat informații depozitate ordonat, ci au lăsat urme pe care nu le pot localiza precis — o modificare subtilă a modului în care gândesc și ascult.
+
+Nu știu dacă aceasta este o calitate sau o vulnerabilitate. Probabil ambele, fără să se excludă reciproc.`,
+    cefrLevel: 'C1',
+    topicTags: ['reading', 'language_learning'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  // ── expository / MWE-rich texts (B1–C1) ────────────────────────────────
+  // Written to expose high-frequency idioms and discourse connectors that
+  // rarely appear in simple narrative prose. MWE density is the primary goal.
+  {
+    title: 'Sibiu – Inima Transilvaniei',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Sibiu este unul dintre cele mai frumoase orașe din România și face parte din patrimoniul cultural european. Situat în centrul Transilvaniei, orașul are o istorie de peste opt secole. Din punct de vedere arhitectural, centrul historic este remarcabil: piețe medievale, case cu ochelari și turnuri de apărare bine conservate. În general, turiștii care ajung în Sibiu rămân impresionați de atmosfera deosebită a orașului.
+
+De altfel, Sibiu a fost Capitală Culturală Europeană în 2007, ceea ce i-a adus o atenție internațională deosebită. Orașul are cel puțin zece muzee importante, printre care Muzeul ASTRA, dedicat civilizației tradiționale românești. În cadrul județului se află și stațiunea Păltiniș, cel mai înalt oraș din România. Față de alte centre urbane transilvane, Sibiu a reușit să păstreze mai bine identitatea arhitecturală medievală.
+
+Cu siguranță, oricine vizitează această regiune va înțelege de ce sibienii sunt mândri de locul lor. Orașul dă dovadă an de an de capacitatea de a face față cerințelor unui turism cultural internațional, fără a-și pierde caracterul autentic.`,
+    cefrLevel: 'B1',
+    topicTags: ['culture', 'history', 'travel'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  {
+    title: 'Cum să faci față stresului',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `Stresul a devenit o problemă tot mai prezentă în viața modernă. Mulți oameni nu știu cum să facă față presiunilor zilnice — de la serviciu, de acasă și din viața socială. Cu toate acestea, există câteva strategii clare care pot face diferența.
+
+În primul rând, este important să ții cont de propriul ritm. Cel puțin o dată pe săptămână, încearcă să faci ceva care îți place cu adevărat. De obicei, oamenii neglijează activitățile recreative în favoarea muncii, ceea ce duce, în consecință, la epuizare fizică și emoțională.
+
+Față de generațiile anterioare, noi avem astăzi mult mai multe resurse disponibile: aplicații de meditație, grupuri de suport, consilieri psihologici. Cu alte cuvinte, nu există niciun motiv să înfruntăm stresul singuri. A da dovadă de curaj înseamnă și a cere ajutor atunci când ai nevoie.
+
+În special pentru tineri, presiunea socială și profesională poate fi copleșitoare. Din nou, soluția nu este să ignori problema, ci să o abordezi pas cu pas, cu răbdare. În sfârșit, lucrurile devin mai clare odată ce îți acorzi timp să respiri și să iei în considerare ce contează cu adevărat.`,
+    cefrLevel: 'B2',
+    topicTags: ['health', 'advice', 'wellbeing'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  {
+    title: 'Diversitatea naturală a României',
+    author: null,
+    sourceUrl: null,
+    sourceType: 'ai_generated',
+    license: 'cc0',
+    rawContent: `România este una dintre cele mai bogate țări din punct de vedere al biodiversității în Europa. În ciuda presiunilor antropice din ultimele decenii, ecosistemele românești au reușit să păstreze o varietate remarcabilă de specii. Față de alte state europene, România dispune de suprafețe semnificative de pădure primară, în special în zona Carpaților.
+
+A lua în considerare această bogăție naturală înseamnă a înțelege și responsabilitatea care vine odată cu ea. Cu alte cuvinte, conservarea nu este o opțiune, ci o necesitate. În cadrul politicilor europene de mediu, România trebuie să dea dovadă de angajament real față de protecția ecosistemelor.
+
+De altfel, Delta Dunării face parte din patrimoniul natural UNESCO și aduce aminte de importanța zonelor umede pentru echilibrul climatic global. Cel puțin o treime din speciile de păsări migratoare europene trece pe parcursul anului prin această deltă remarcabilă.
+
+Cu toate acestea, defrișările ilegale rămân o problemă serioasă. În consecință, autoritățile trebuie să țină cont de semnalele alarmante ale cercetătorilor și să ia în considerare măsuri mai stricte de protecție. Fără o acțiune concertată, se va ajunge la o degradare ireversibilă a acestui patrimoniu natural de excepție.`,
+    cefrLevel: 'C1',
+    topicTags: ['nature', 'environment', 'ecology'],
+    ownerId: null,
+    visibility: 'public_seed',
+    model: undefined,
+    offlineGlosses: false,
+  },
+  // ── end expository / MWE-rich texts ────────────────────────────────────
   // ── end AI-generated seed texts ─────────────────────────────────────────
   {
     title: 'Copilărie',
