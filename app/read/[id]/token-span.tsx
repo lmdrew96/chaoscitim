@@ -1,10 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { TextToken } from '@/db/schema';
 import type { MWE } from '@/lib/mwe';
 import { TokenWord } from './token-word';
-import { shouldPrependSpace } from './spacing';
+import { TokenMwt } from './token-mwt';
+import { shouldPrependSpace, groupMwtTokens } from './spacing';
 
 /**
  * Renders a contiguous run of tokens belonging to a single MWE span.
@@ -24,6 +25,45 @@ export function TokenSpan({
   mwe: MWE;
 }) {
   const [hovered, setHovered] = useState(false);
+  const groups = useMemo(() => groupMwtTokens(tokens), [tokens]);
+
+  const items: React.ReactNode[] = [];
+  let prevToken: TextToken | null = null;
+
+  for (const group of groups) {
+    const leadTok = group.isMwt ? group.tokens[0]! : group.token;
+    const space = prevToken && shouldPrependSpace(prevToken, leadTok) ? ' ' : '';
+
+    if (group.isMwt) {
+      items.push(
+        <span key={group.tokens[0]!.tokenPosition}>
+          {space}
+          <TokenMwt tokens={group.tokens} sentenceTokens={sentenceTokens} />
+        </span>,
+      );
+      prevToken = group.tokens[group.tokens.length - 1]!;
+    } else if (group.token.upos === 'PUNCT') {
+      items.push(
+        <span key={group.token.tokenPosition}>
+          {space}
+          {group.token.surfaceForm}
+        </span>,
+      );
+      prevToken = group.token;
+    } else {
+      const head =
+        group.token.headPosition && group.token.headPosition > 0
+          ? sentenceTokens.find((t) => t.tokenPosition === group.token.headPosition) ?? null
+          : null;
+      items.push(
+        <span key={group.token.tokenPosition}>
+          {space}
+          <TokenWord token={group.token} head={head} mwe={mwe} />
+        </span>,
+      );
+      prevToken = group.token;
+    }
+  }
 
   return (
     <span
@@ -41,31 +81,7 @@ export function TokenSpan({
         </span>
       ) : null}
 
-      {tokens.map((token, idx) => {
-        const prev = idx > 0 ? tokens[idx - 1]! : null;
-        const space = prev && shouldPrependSpace(prev, token) ? ' ' : '';
-
-        if (token.upos === 'PUNCT') {
-          return (
-            <span key={token.tokenPosition}>
-              {space}
-              {token.surfaceForm}
-            </span>
-          );
-        }
-
-        const head =
-          token.headPosition && token.headPosition > 0
-            ? sentenceTokens.find((t) => t.tokenPosition === token.headPosition) ?? null
-            : null;
-
-        return (
-          <span key={token.tokenPosition}>
-            {space}
-            <TokenWord token={token} head={head} mwe={mwe} />
-          </span>
-        );
-      })}
+      {items}
     </span>
   );
 }

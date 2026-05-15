@@ -8,7 +8,8 @@ import { findMWEMatches, loadMWETable, type MWEMatch } from '@/lib/mwe';
 import { useReadingSession } from '@/lib/session';
 import { TokenWord } from './token-word';
 import { TokenSpan } from './token-span';
-import { shouldPrependSpace } from './spacing';
+import { TokenMwt } from './token-mwt';
+import { shouldPrependSpace, groupMwtTokens } from './spacing';
 import { SessionContextProvider } from './session-context';
 import { CardContextProvider } from './card-context';
 import { GlossCard } from './gloss-card';
@@ -78,26 +79,47 @@ function SentenceP({
   const spanStartByPos = new Map<number, MWEMatch>();
   for (const m of matches) spanStartByPos.set(m.startPos, m);
 
+  const groups = useMemo(() => groupMwtTokens(tokens), [tokens]);
+
   const chunks: React.ReactNode[] = [];
-  let i = 0;
-  while (i < tokens.length) {
-    const tok = tokens[i]!;
-    const span = spanStartByPos.get(tok.tokenPosition);
-    const prev = i > 0 ? tokens[i - 1]! : null;
-    const space = prev && shouldPrependSpace(prev, tok) ? ' ' : '';
+  let prevToken: TextToken | null = null;
+  const consumed = new Set<number>(); // token positions absorbed by an MWE span
+
+  for (const group of groups) {
+    const leadTok = group.isMwt ? group.tokens[0]! : group.token;
+
+    if (consumed.has(leadTok.tokenPosition)) continue;
+
+    const space = prevToken && shouldPrependSpace(prevToken, leadTok) ? ' ' : '';
+    const span = spanStartByPos.get(leadTok.tokenPosition);
 
     if (span) {
       const endIdx = tokens.findIndex((t) => t.tokenPosition === span.endPos);
-      const spanTokens = tokens.slice(i, endIdx + 1);
+      const startIdx = tokens.indexOf(leadTok);
+      const spanTokens = tokens.slice(startIdx, endIdx + 1);
+      for (const t of spanTokens) consumed.add(t.tokenPosition);
       chunks.push(
-        <span key={`s-${tok.tokenPosition}`}>
+        <span key={`s-${leadTok.tokenPosition}`}>
           {space}
           <TokenSpan tokens={spanTokens} sentenceTokens={tokens} mwe={span.mwe} />
         </span>,
       );
-      i = endIdx + 1;
+      prevToken = tokens[endIdx] ?? leadTok;
       continue;
     }
+
+    if (group.isMwt) {
+      chunks.push(
+        <span key={`mwt-${leadTok.tokenPosition}`}>
+          {space}
+          <TokenMwt tokens={group.tokens} sentenceTokens={tokens} />
+        </span>,
+      );
+      prevToken = group.tokens[group.tokens.length - 1]!;
+      continue;
+    }
+
+    const tok = group.token;
 
     if (tok.upos === 'PUNCT') {
       chunks.push(
@@ -106,7 +128,7 @@ function SentenceP({
           {tok.surfaceForm}
         </span>,
       );
-      i++;
+      prevToken = tok;
       continue;
     }
 
@@ -121,7 +143,7 @@ function SentenceP({
         <TokenWord token={tok} head={head ?? null} />
       </span>,
     );
-    i++;
+    prevToken = tok;
   }
 
   return <p className="mb-6">{chunks}</p>;

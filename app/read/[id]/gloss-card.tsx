@@ -98,7 +98,8 @@ export function GlossCard() {
 
   if (!mounted || !activeCard) return null;
 
-  const { token, head, mwe } = activeCard;
+  const { token, head, mwe, mwtTokens } = activeCard;
+  const isMwt = mwtTokens && mwtTokens.length > 1;
 
   const tier1Label = formatTier1(token.upos, token.features ?? null);
   const headLabel =
@@ -111,12 +112,17 @@ export function GlossCard() {
   const staticGloss = token.glossEn ?? null;
   const displayGloss = contextGloss ?? staticGloss;
 
-  const tier3Available = displayGloss || mwe;
+  const tier3Available = !isMwt && (displayGloss || mwe);
 
   const cardStyle = computeStyle(activeCard.anchor);
 
   const isMobile =
     typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+
+  // Joined surface form for MWT header
+  const headerForm = isMwt
+    ? mwtTokens!.map((t) => t.surfaceForm).join('')
+    : token.surfaceForm;
 
   return createPortal(
     <div
@@ -132,7 +138,7 @@ export function GlossCard() {
       {/* Header row */}
       <div className="mb-3 flex items-start justify-between gap-2">
         <span className="font-serif text-lg font-semibold leading-tight">
-          {token.surfaceForm}
+          {headerForm}
         </span>
         <button
           type="button"
@@ -144,55 +150,112 @@ export function GlossCard() {
         </button>
       </div>
 
-      {/* Tier 1 — morphology */}
-      {tier1Label ? (
-        <p className="mb-1 font-mono text-xs text-tier-1">{tier1Label}</p>
-      ) : null}
+      {/* MWT: stacked morphology + optional tier-3 per component */}
+      {isMwt ? (
+        <>
+          <div className="space-y-2">
+            {mwtTokens!.map((tok) => {
+              const t1 = formatTier1(tok.upos, tok.features ?? null);
+              return (
+                <div key={tok.tokenPosition} className="flex items-baseline gap-2">
+                  <span className="w-14 shrink-0 font-serif text-sm text-foreground/60">
+                    {tok.surfaceForm}
+                  </span>
+                  {t1 ? (
+                    <span className="font-mono text-xs text-tier-1">{t1}</span>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
 
-      {/* Tier 2 — syntactic role */}
-      {tier2Label ? (
-        <p className="mb-1 font-mono text-xs text-tier-2">
-          {renderEmphasis(tier2Label)}
-        </p>
-      ) : null}
-
-      {/* Tier 3 — AI gloss, collapsible */}
-      {tier3Available ? (
-        <div className="mt-3 border-t border-foreground/10 pt-3">
-          {!tier3Open ? (
-            <button
-              type="button"
-              onClick={expandTier3}
-              className="flex w-full items-center gap-1.5 text-left font-mono text-xs text-foreground/50 hover:text-foreground/80"
-            >
-              <span className="text-[0.65rem]">▶</span>
-              <span>show English gloss</span>
-            </button>
-          ) : (
-            <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-              {displayGloss ? (
-                <span className="font-mono text-xs text-tier-3">
-                  {contextGloss ? `"${contextGloss}"` : displayGloss}
-                  {' · '}
-                  <span className="opacity-70">{token.lemma}</span>
-                </span>
+          {mwtTokens!.some((t) => t.glossEnContext || t.glossEn) ? (
+            <div className="mt-3 border-t border-foreground/10 pt-3">
+              {!tier3Open ? (
+                <button
+                  type="button"
+                  onClick={expandTier3}
+                  className="flex w-full items-center gap-1.5 text-left font-mono text-xs text-foreground/50 hover:text-foreground/80"
+                >
+                  <span className="text-[0.65rem]">▶</span>
+                  <span>show English gloss</span>
+                </button>
               ) : (
-                <span className="font-mono text-xs text-foreground/50">
-                  {token.lemma}
-                </span>
+                <div className="space-y-1.5">
+                  {mwtTokens!.map((tok) => {
+                    const g = tok.glossEnContext ?? tok.glossEn;
+                    if (!g) return null;
+                    return (
+                      <div key={tok.tokenPosition} className="flex items-baseline gap-2">
+                        <span className="w-14 shrink-0 font-serif text-sm text-foreground/60">
+                          {tok.surfaceForm}
+                        </span>
+                        <span className="font-mono text-xs text-tier-3">
+                          {tok.glossEnContext ? `"${tok.glossEnContext}"` : g}
+                          {' · '}
+                          <span className="opacity-70">{tok.lemma}</span>
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
               )}
-
-              {mwe ? (
-                <span className="font-mono text-xs text-tier-3 opacity-80">
-                  {mwe.gloss}
-                  {' · '}
-                  <span className="opacity-70">{mwe.lemmas.join(' ')}</span>
-                </span>
-              ) : null}
             </div>
-          )}
-        </div>
-      ) : null}
+          ) : null}
+        </>
+      ) : (
+        <>
+          {/* Tier 1 — morphology */}
+          {tier1Label ? (
+            <p className="mb-1 font-mono text-xs text-tier-1">{tier1Label}</p>
+          ) : null}
+
+          {/* Tier 2 — syntactic role */}
+          {tier2Label ? (
+            <p className="mb-1 font-mono text-xs text-tier-2">
+              {renderEmphasis(tier2Label)}
+            </p>
+          ) : null}
+
+          {/* Tier 3 — AI gloss, collapsible */}
+          {tier3Available ? (
+            <div className="mt-3 border-t border-foreground/10 pt-3">
+              {!tier3Open ? (
+                <button
+                  type="button"
+                  onClick={expandTier3}
+                  className="flex w-full items-center gap-1.5 text-left font-mono text-xs text-foreground/50 hover:text-foreground/80"
+                >
+                  <span className="text-[0.65rem]">▶</span>
+                  <span>show English gloss</span>
+                </button>
+              ) : (
+                <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                  {displayGloss ? (
+                    <span className="font-mono text-xs text-tier-3">
+                      {contextGloss ? `"${contextGloss}"` : displayGloss}
+                      {' · '}
+                      <span className="opacity-70">{token.lemma}</span>
+                    </span>
+                  ) : (
+                    <span className="font-mono text-xs text-foreground/50">
+                      {token.lemma}
+                    </span>
+                  )}
+
+                  {mwe ? (
+                    <span className="font-mono text-xs text-tier-3 opacity-80">
+                      {mwe.gloss}
+                      {' · '}
+                      <span className="opacity-70">{mwe.lemmas.join(' ')}</span>
+                    </span>
+                  ) : null}
+                </div>
+              )}
+            </div>
+          ) : null}
+        </>
+      )}
 
       {/* Mobile drag handle hint */}
       {isMobile ? (

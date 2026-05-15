@@ -26,6 +26,8 @@ export interface ActiveCard {
   token: TextToken;
   head: TextToken | null;
   mwe: Pick<MWE, 'gloss' | 'lemmas'> | null;
+  /** Set when the card represents a multi-word token (contraction). */
+  mwtTokens?: TextToken[];
   anchor: AnchorInfo;
 }
 
@@ -51,9 +53,19 @@ export function CardContextProvider({ children }: { children: ReactNode }) {
 
   const openCard = useCallback((card: ActiveCard) => {
     setActiveCard(card);
-    if (!lookedUpRef.current.has(card.tokenId)) {
-      lookedUpRef.current = new Set(lookedUpRef.current).add(card.tokenId);
-      setLookedUp(lookedUpRef.current);
+    // For MWT cards, mark each component's individual tokenId as looked up.
+    const idsToMark = card.mwtTokens
+      ? card.mwtTokens.map((t) => `${t.sentenceId}:${t.tokenPosition}`)
+      : [card.tokenId];
+    const prev = lookedUpRef.current;
+    const next = new Set(prev);
+    let changed = false;
+    for (const id of idsToMark) {
+      if (!next.has(id)) { next.add(id); changed = true; }
+    }
+    if (changed) {
+      lookedUpRef.current = next;
+      setLookedUp(next);
     }
   }, []);
 
