@@ -451,6 +451,10 @@ async function main(): Promise<void> {
       console.log(`    word tokens:         ${prepared.diagnostics.wordCount}`);
       console.log(`    total tokens:        ${prepared.tokenRows.length}`);
       console.log(`    glosses resolved:    ${prepared.diagnostics.glossesResolved}`);
+      console.log(`    context glosses:     ${prepared.diagnostics.contextGlossesGenerated} (${prepared.diagnostics.contextGlossesMissing} missing)`);
+      if (!input.skipContextGlosses && prepared.diagnostics.contextGlossesGenerated === 0 && prepared.diagnostics.wordCount > 0) {
+        console.warn(`  ⚠ context glosses came back empty — run backfill-context-glosses.ts --text <id> after ingestion`);
+      }
 
       const id = await commitIngestion(prepared);
       console.log(`✓ ingested as text ${id}\n`);

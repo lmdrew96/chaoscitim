@@ -187,7 +187,12 @@ export async function prepareIngestion(
     sentenceCount: sentences.length,
     ownerId: input.ownerId ?? null,
     visibility: input.visibility,
-    glossModelVersion: input.skipContextGlosses ? null : MODEL_VERSION,
+    // Leave glossModelVersion null if context glosses were expected but none
+    // were generated — the backfill script uses IS NULL to find texts that
+    // need (re)processing, so a silent API failure stays detectable.
+    glossModelVersion: input.skipContextGlosses || contextGlossesGenerated === 0
+      ? null
+      : MODEL_VERSION,
   };
 
   return {
