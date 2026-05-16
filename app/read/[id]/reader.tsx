@@ -13,10 +13,18 @@ import { shouldPrependSpace, groupMwtTokens } from './spacing';
 import { SessionContextProvider } from './session-context';
 import { CardContextProvider } from './card-context';
 import { GlossCard } from './gloss-card';
+import {
+  useReaderSettings,
+  ReaderSettingsButton,
+  FONT_SIZE_MAP,
+  FONT_FAMILY_MAP,
+  WIDTH_CLASS_MAP,
+} from './reader-settings';
 
 export function Reader({ payload }: { payload: ReadingPayload }) {
   const mweTable = useMemo(() => loadMWETable(), []);
   const [mode, setMode] = useState<SessionMode>('active');
+  const { settings, update, mounted } = useReaderSettings();
 
   const { logEvent } = useReadingSession({
     textId: payload.text.id,
@@ -29,10 +37,17 @@ export function Reader({ payload }: { payload: ReadingPayload }) {
     setMode(next);
   };
 
+  const articleStyle = mounted
+    ? ({
+        '--reader-font-size': FONT_SIZE_MAP[settings.fontSize],
+        '--reader-font-family': FONT_FAMILY_MAP[settings.font],
+      } as React.CSSProperties)
+    : undefined;
+
   return (
     <SessionContextProvider value={{ logEvent, mode, setMode: handleSetMode }}>
       <CardContextProvider>
-        <div className="mt-6 flex items-center justify-end">
+        <div className="mt-6 flex items-center justify-end gap-2">
           <button
             type="button"
             onClick={() => handleSetMode(mode === 'show_all' ? 'active' : 'show_all')}
@@ -44,10 +59,14 @@ export function Reader({ payload }: { payload: ReadingPayload }) {
           >
             {mode === 'show_all' ? 'glosses on' : 'glosses off'}
           </button>
+          {mounted && (
+            <ReaderSettingsButton settings={settings} update={update} />
+          )}
         </div>
 
         <article
-          className="reading-prose mt-4"
+          className={`reading-prose mt-4 mx-auto ${mounted ? WIDTH_CLASS_MAP[settings.width] : 'max-w-2xl'}`}
+          style={articleStyle}
         >
           {payload.sentences.map((sentence) => (
             <SentenceP

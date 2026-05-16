@@ -67,11 +67,23 @@
   --font-mono:        var(--font-geist-mono, 'Geist Mono', 'Fira Code', monospace);
 }
 
+/* System preference — only applies when no manual override is set */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --background: #1E1830;
     --foreground: #F7F5FA;
   }
+}
+
+/* Manual theme overrides — set by reader-settings.tsx on <html> */
+:root[data-theme="dark"] {
+  --background: #1E1830;
+  --foreground: #F7F5FA;
+}
+
+:root[data-theme="light"] {
+  --background: #F7F5FA;
+  --foreground: #1E1830;
 }
 
 html,
@@ -89,10 +101,10 @@ h1, h2, h3, h4 {
   font-variation-settings: 'SOFT' 0, 'WONK' 1;
 }
 
-/* Reading surface: Fraunces is a reading-optimized literary serif — fits Romanian texts */
+/* Reading surface — font/size controlled by CSS vars set from reader-settings.tsx */
 .reading-prose {
-  font-family: var(--font-fraunces, 'Fraunces', Georgia, serif);
-  font-size: 1.15rem;
+  font-family: var(--reader-font-family, var(--font-fraunces, 'Fraunces', Georgia, serif));
+  font-size: var(--reader-font-size, 1.15rem);
   line-height: 1.85;
   font-variation-settings: 'SOFT' 0, 'WONK' 1;
 }
