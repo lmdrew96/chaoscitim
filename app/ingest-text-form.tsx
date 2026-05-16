@@ -209,7 +209,7 @@ export function IngestTextForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="mt-10 border-y border-foreground/15 py-7"
+      className="p-7"
     >
       <div className="mb-5 flex items-start justify-between gap-4">
         <div>
