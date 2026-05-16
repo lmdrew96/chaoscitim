@@ -71,19 +71,19 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --background: #1E1830;
-    --foreground: #F7F5FA;
+    --foreground: #DBD5E2;
   }
 }
 
 /* Manual theme overrides — set by reader-settings.tsx on <html> */
 :root[data-theme="dark"] {
   --background: #1E1830;
-  --foreground: #F7F5FA;
+  --foreground: #DBD5E2;
 }
 
 :root[data-theme="light"] {
-  --background: #F7F5FA;
-  --foreground: #1E1830;
+  --background: var(--surface);
+  --foreground: var(--ink);
 }
 
 html,

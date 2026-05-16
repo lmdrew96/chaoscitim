@@ -132,7 +132,7 @@ export function TokenMwt({ tokens, sentenceTokens }: TokenMwtProps) {
           isActive
             ? 'underline decoration-tier-3 decoration-2 underline-offset-4'
             : wasLookedUp
-              ? 'underline decoration-foreground/25 decoration-dotted decoration-1 underline-offset-4'
+              ? 'underline decoration-mint decoration-2 underline-offset-4'
               : '',
         ]
           .filter(Boolean)
